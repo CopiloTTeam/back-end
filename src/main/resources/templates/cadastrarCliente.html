@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Cadastro</h1>
+    <a href="/cadastrar/cliente">Cadastro</a>
+    <a href="/listar/clientes">Clientes</a>
+    <a href="/listar/cliente">Cliente</a>
+    <a href="/atualizar/cliente">Atualizar</a>
+    <a href="/deletar/cliente">Deletar</a>
+
+    </br></br>
+
+    <form th:action="@{/cadastrar/cliente}" th:object="${cliente}" method="post">
+        <label for="nome">Nome: </label>
+        <input type="text" th:field="*{nome}">
+        </br>
+        <label for="cpf">CPF: </label>
+        <input type="text" th:field="*{cpf}">
+        </br>
+        <label for="cep">CEP: </label>
+        <input type="text" th:field="*{cep}">
+        </br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+
+</html>

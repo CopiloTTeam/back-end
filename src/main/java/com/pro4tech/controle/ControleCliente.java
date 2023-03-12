@@ -2,31 +2,47 @@ package com.pro4tech.controle;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.pro4tech.modelo.Cliente;
 import com.pro4tech.repositorio.RepositorioCliente;
 
-@RestController
+
+@Controller
 public class ControleCliente {
     
     @Autowired
     private RepositorioCliente repositorio;
 
-    @PostMapping("/cadastrar/cliente")
-    public String cadastrarCliente(@RequestBody Cliente cliente){
-        String mensagem = "Cliente " + cliente.getNome() + " cadastrado com sucesso!";
-        repositorio.save(cliente);
-        return mensagem;
+    @GetMapping("/")
+    public String home(){
+        return "home";
     }
 
+    @GetMapping("/cadastrar/cliente")
+    public String cadastroCliente(Model model){
+        model.addAttribute("cliente", new Cliente());
+        return "cadastrarCliente";
+    }
+
+    @PostMapping("/cadastrar/cliente")
+    public String cadastrarCliente(@ModelAttribute Cliente cliente){
+        repositorio.save(cliente);
+        return "redirect:/";
+    }
+
+
+
+
+
+
+
+
     @GetMapping("/listar/clientes")
-    public Iterable<Cliente> listarClientes(){
-        return repositorio.findAll();
+    public String listarClientes(Model model){
+        model.addAttribute("clientes", repositorio.findAll());
+        return "listarClientes";
     }
 
     @GetMapping("/listar/cliente")
