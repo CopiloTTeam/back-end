@@ -32,23 +32,20 @@ public class ControleCliente {
         return "redirect:/";
     }
 
-
-
-
-
-
-
-
     @GetMapping("/listar/clientes")
     public String listarClientes(Model model){
         model.addAttribute("clientes", repositorio.findAll());
         return "listarClientes";
     }
 
-    @GetMapping("/listar/cliente")
-    public Cliente listarCliente(@RequestBody Cliente cliente){
-        return repositorio.findById(cliente.getId()).get();
+    @GetMapping("/listar/cliente/{id}")
+    public String listarCliente(@PathVariable("id") long id, Model model){
+        Cliente cliente = repositorio.findById(id).get();
+        model.addAttribute("cliente", cliente);
+        return "listarCliente";
     }
+
+    
 
     @PatchMapping("/atualizar/cliente")
     public String atualizarCliente(@RequestBody Cliente cliente){
