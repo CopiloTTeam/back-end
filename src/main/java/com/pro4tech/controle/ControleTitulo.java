@@ -1,37 +1,46 @@
 package com.pro4tech.controle;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import com.pro4tech.modelo.Titulo;
 import com.pro4tech.repositorio.RepositorioTitulo;
 
-@RestController
+
+@Controller
 public class ControleTitulo {
     
     @Autowired
     private RepositorioTitulo repositorio;
 
+    @GetMapping("/cadastrar/titulo")
+    public String cadastroTitulo(Model model){
+        model.addAttribute("titulo", new Titulo());
+        return "cadastrarTitulo";
+    }
+
     @PostMapping("/cadastrar/titulo")
-    public String cadastrarTitulo(@RequestBody Titulo titulo){
-        String mensagem = "Titulo " + titulo.getId_titulo() + " cadastrado com sucesso!";
+    public String cadastrarTitulo(@ModelAttribute Titulo titulo){
         repositorio.save(titulo);
-        return mensagem;
+        return "redirect:/";
     }
 
     @GetMapping("/listar/titulos")
-    public Iterable<Titulo> listarTitulos(){
-        return repositorio.findAll();
+    public String listarTitulos(Model model){
+        model.addAttribute("titulos", repositorio.findAll());
+        return "listarTitulos";
     }
 
-    @GetMapping("/listar/titulo")
-    public Titulo listarTitulo(@RequestBody Titulo titulo){
-        return repositorio.findById(titulo.getId_titulo()).get();
+    @GetMapping("/listar/titulo/{id}")
+    public String listarTitulo(@PathVariable("id") long id, Model model){
+        Titulo titulo = repositorio.findById(id).get();
+        model.addAttribute("titulo", titulo);
+        return "listarTitulo";
     }
+
+    
 
     @PatchMapping("/atualizar/titulo")
     public String atualizarTitulo(@RequestBody Titulo titulo){
