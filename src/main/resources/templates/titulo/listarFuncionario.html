@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Clientes</h1>
+    <a href="/">Home</a>
+    <a href="/cadastrar/cliente">Cadastro</a>
+    <a href="/listar/clientes">Clientes</a>
+
+    </br></br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>CEP</th>
+                <th>Atualizar</th>
+                <th>Deletar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.cpf}"></td>
+                <td th:text="${cliente.cep}"></td>
+                <td>
+                    <a href="/atualizar/cliente" th:href=@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}>Atualizar</a>
+                </td>
+                <td>
+                    <a href="/deletar/cliente" th:href=@{/deletar/cliente/{clienteid}(clienteid=${cliente.id})}>Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

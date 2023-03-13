@@ -15,50 +15,46 @@ public class ControleCliente {
     @Autowired
     private RepositorioCliente repositorio;
 
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
-
     @GetMapping("/cadastrar/cliente")
     public String cadastroCliente(Model model){
         model.addAttribute("cliente", new Cliente());
-        return "cadastrarCliente";
+        return "cliente/cadastrarCliente";
     }
 
     @PostMapping("/cadastrar/cliente")
     public String cadastrarCliente(@ModelAttribute Cliente cliente){
         repositorio.save(cliente);
-        return "redirect:/";
+        return "redirect:/listarClientes";
     }
 
     @GetMapping("/listar/clientes")
     public String listarClientes(Model model){
         model.addAttribute("clientes", repositorio.findAll());
-        return "listarClientes";
+        return "cliente/listarClientes";
     }
 
-    @GetMapping("/listar/cliente/{id}")
-    public String listarCliente(@PathVariable("id") long id, Model model){
+    @GetMapping("/atualizar/cliente/{id}")
+    public String atualizarCliente(@PathVariable("id") long id, Model model){
         Cliente cliente = repositorio.findById(id).get();
         model.addAttribute("cliente", cliente);
-        return "listarCliente";
+        return "cliente/atualizarCliente";
     }
 
-    
-
-    @PatchMapping("/atualizar/cliente")
-    public String atualizarCliente(@RequestBody Cliente cliente){
-        String mensagem = "Cliente " + cliente.getNome() + " atualizado com sucesso!";
-        repositorio.save(cliente);
-        return mensagem;
+    @PostMapping("/atualizar/cliente/{id}")
+    public String atualizarCliente(@PathVariable("id") long id, @ModelAttribute Cliente cliente){
+        Cliente clienteAtualizado = repositorio.findById(cliente.getId()).get();
+        clienteAtualizado.setNome(cliente.getNome());
+        clienteAtualizado.setCpf(cliente.getCpf());
+        clienteAtualizado.setCep(cliente.getCep());
+        repositorio.save(clienteAtualizado);
+        return "redirect:/listar/clientes";
     }
 
-    @PostMapping("/deletar/cliente")
-    public String deletarCliente(@RequestBody Cliente cliente){
-        String mensagem = "Cliente " + cliente.getNome() + " deletado com sucesso!";
+    @GetMapping("/deletar/cliente/{id}")
+    public String deletarCliente(@PathVariable("id") long id){
+        Cliente cliente = repositorio.findById(id).get();
         repositorio.delete(cliente);
-        return mensagem;
+        return "redirect:/listar/clientes";
     }
 
 }

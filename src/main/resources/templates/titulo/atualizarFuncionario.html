@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Atualização</title>
 </head>
 
 <body>
-    <h1>Login</h1>
+    <h1>Cadastro</h1>
+    <a href="/">Home</a>
+    <a href="/cadastrar/cliente">Cadastro</a>
+    <a href="/listar/clientes">Clientes</a>
 
-    <a href="/home">Home</a>
+    </br></br>
 
-    </br>
-
-    <form th:action="@{/cadastrar/cliente}" th:object="${cliente}" method="post">
+    <form th:action="@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}" th:object="${cliente}" method="post">
         <label for="nome">Nome: </label>
         <input type="text" th:field="*{nome}">
         </br>

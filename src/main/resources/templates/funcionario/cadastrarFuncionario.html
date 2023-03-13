@@ -9,11 +9,12 @@
 </head>
 
 <body>
-    <h1>Login</h1>
+    <h1>Cadastro</h1>
+    <a href="/">Home</a>
+    <a href="/cadastrar/cliente">Cadastro</a>
+    <a href="/listar/clientes">Clientes</a>
 
-    <a href="/home">Home</a>
-
-    </br>
+    </br></br>
 
     <form th:action="@{/cadastrar/cliente}" th:object="${cliente}" method="post">
         <label for="nome">Nome: </label>
