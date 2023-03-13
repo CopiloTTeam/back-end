@@ -24,6 +24,9 @@ public class Cliente {
     @Column
     private String cep;
 
+    @Column
+    private String endereco;
+
 
     public Long getId() {
         return this.id;
@@ -55,6 +58,14 @@ public class Cliente {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public String getEndereco() {
+        return this.endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
 

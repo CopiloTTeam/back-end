@@ -10,21 +10,21 @@
 
 <body>
     <h1>Cadastro - Funcionario</h1>
-    <a href="/">Home</a>
-    <a href="/cadastrar/cliente">Cadastro</a>
-    <a href="/listar/clientes">Clientes</a>
+    <a href="/home">Home</a>
+    <a href="/cadastrar/funcionario">Cadastro</a>
+    <a href="/listar/funcionarios">Clientes</a>
 
     </br></br>
 
-    <form th:action="@{/cadastrar/cliente}" th:object="${cliente}" method="post">
+    <form th:action="@{/cadastrar/funcionario}" th:object="${funcionario}" method="post">
         <label for="nome">Nome: </label>
         <input type="text" th:field="*{nome}">
         </br>
         <label for="cpf">CPF: </label>
         <input type="text" th:field="*{cpf}">
         </br>
-        <label for="cep">CEP: </label>
-        <input type="text" th:field="*{cep}">
+        <label for="cargo">Cargo: </label>
+        <input type="text" th:field="*{cargo}">
         </br>
         <button type="submit">Cadastrar</button>
     </form>

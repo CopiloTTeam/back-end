@@ -11,22 +11,22 @@
 <body>
     <h1>Atualização - Funcionario</h1>
     <a href="/home">Home</a>
-    <a href="/cadastrar/cliente">Cadastro</a>
-    <a href="/listar/clientes">Clientes</a>
+    <a href="/cadastrar/funcionario">Cadastro</a>
+    <a href="/listar/funcionarios">Funcionarios</a>
 
     </br></br>
 
-    <form th:action="@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}" th:object="${cliente}" method="post">
+    <form th:action="@{/atualizar/funcionario/{funcionarioid}(funcionarioid=${funcionario.id})}" th:object="${funcionario}" method="post">
         <label for="nome">Nome: </label>
         <input type="text" th:field="*{nome}">
         </br>
         <label for="cpf">CPF: </label>
         <input type="text" th:field="*{cpf}">
         </br>
-        <label for="cep">CEP: </label>
-        <input type="text" th:field="*{cep}">
+        <label for="cargo">cargo: </label>
+        <input type="text" th:field="*{cargo}">
         </br>
-        <button type="submit">Cadastrar</button>
+        <button type="submit">atualizar</button>
     </form>
 </body>
 

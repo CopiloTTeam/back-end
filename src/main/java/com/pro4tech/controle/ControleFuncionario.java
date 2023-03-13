@@ -18,42 +18,43 @@ public class ControleFuncionario {
     @GetMapping("/cadastrar/funcionario")
     public String cadastroFuncionario(Model model){
         model.addAttribute("funcionario", new Funcionario());
-        return "cadastrarFuncionario";
+        return "funcionario/cadastrarFuncionario";
     }
 
     @PostMapping("/cadastrar/funcionario")
     public String cadastrarFuncionario(@ModelAttribute Funcionario funcionario){
         repositorio.save(funcionario);
-        return "redirect:/";
+        return "redirect:/listar/funcionarios";
     }
 
     @GetMapping("/listar/funcionarios")
     public String listarFuncionarios(Model model){
         model.addAttribute("funcionarios", repositorio.findAll());
-        return "listarFuncionarios";
+        return "funcionario/listarFuncionarios";
     }
 
-    @GetMapping("/listar/funcionario/{id}")
-    public String listarFuncionario(@PathVariable("id") long id, Model model){
+    @GetMapping("/atualizar/funcionario/{id}")
+    public String atualizarFuncionario(@PathVariable("id") long id, Model model){
         Funcionario funcionario = repositorio.findById(id).get();
         model.addAttribute("funcionario", funcionario);
-        return "listarFuncionario";
+        return "funcionario/atualizarFuncionario";
     }
 
-    
-
-    @PatchMapping("/atualizar/funcionario")
-    public String atualizarFuncionario(@RequestBody Funcionario funcionario){
-        String mensagem = "Funcionario " + funcionario.getNome() + " atualizado com sucesso!";
-        repositorio.save(funcionario);
-        return mensagem;
+    @PostMapping("/atualizar/funcionario/{id}")
+    public String atualizarFuncionario(@PathVariable("id") long id, @ModelAttribute Funcionario funcionario){
+        Funcionario funcionarioAtualizado = repositorio.findById(funcionario.getId()).get();
+        funcionarioAtualizado.setNome(funcionario.getNome());
+        funcionarioAtualizado.setCpf(funcionario.getCpf());
+        funcionarioAtualizado.setCargo(funcionario.getCargo());
+        repositorio.save(funcionarioAtualizado);
+        return "redirect:/listar/funcionarios";
     }
 
-    @PostMapping("/deletar/funcionario")
-    public String deletarFuncionario(@RequestBody Funcionario funcionario){
-        String mensagem = "Funcionario " + funcionario.getNome() + " deletado com sucesso!";
+    @GetMapping("/deletar/funcionario/{id}")
+    public String deletarFuncionario(@PathVariable("id") long id){
+        Funcionario funcionario = repositorio.findById(id).get();
         repositorio.delete(funcionario);
-        return mensagem;
+        return "redirect:/listar/funcionarios";
     }
 
 }

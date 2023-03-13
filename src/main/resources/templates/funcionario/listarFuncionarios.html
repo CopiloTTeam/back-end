@@ -26,10 +26,10 @@
 </head>
 
 <body>
-    <h1>Funcionario</h1>
-    <a href="/">Home</a>
-    <a href="/cadastrar/cliente">Cadastro</a>
-    <a href="/listar/clientes">Clientes</a>
+    <h1>Cadastrar - Funcionario</h1>
+    <a href="/home">Home</a>
+    <a href="/cadastrar/funcionario">Cadastro</a>
+    <a href="/listar/funcionarios">Clientes</a>
 
     </br></br>
 
@@ -39,22 +39,22 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>CPF</th>
-                <th>CEP</th>
+                <th>Cargo</th>
                 <th>Atualizar</th>
                 <th>Deletar</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="cliente : ${clientes}">
-                <td th:text="${cliente.id}"></td>
-                <td th:text="${cliente.nome}"></td>
-                <td th:text="${cliente.cpf}"></td>
-                <td th:text="${cliente.cep}"></td>
+            <tr th:each="funcionario : ${funcionarios}">
+                <td th:text="${funcionario.id}"></td>
+                <td th:text="${funcionario.nome}"></td>
+                <td th:text="${funcionario.cpf}"></td>
+                <td th:text="${funcionario.cargo}"></td>
                 <td>
-                    <a href="/atualizar/cliente" th:href=@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}>Atualizar</a>
+                    <a href="/atualizar/funcionario" th:href=@{/atualizar/funcionario/{funcionarioid}(funcionarioid=${funcionario.id})}>Atualizar</a>
                 </td>
                 <td>
-                    <a href="/deletar/cliente" th:href=@{/deletar/cliente/{clienteid}(clienteid=${cliente.id})}>Deletar</a>
+                    <a href="/deletar/funcionario" th:href=@{/deletar/funcionario/{funcionarioid}(funcionarioid=${funcionario.id})}>Deletar</a>
                 </td>
             </tr>
         </tbody>
