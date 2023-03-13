@@ -13,20 +13,17 @@
 
     <a href="/home">Home</a>
 
-    </br>
+    </br><br>
 
-    <form th:action="@{/cadastrar/cliente}" th:object="${cliente}" method="post">
-        <label for="nome">Nome: </label>
-        <input type="text" th:field="*{nome}">
+    <form action="/login" method="post">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Digite seu email" required>
         </br>
-        <label for="cpf">CPF: </label>
-        <input type="text" th:field="*{cpf}">
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
         </br>
-        <label for="cep">CEP: </label>
-        <input type="text" th:field="*{cep}">
-        </br>
-        <button type="submit">Cadastrar</button>
-    </form>
+        <a href="/cadastro">Cadastrar-se</a><br>
+        <input type="submit" value="Entrar">
 </body>
 
 </html>

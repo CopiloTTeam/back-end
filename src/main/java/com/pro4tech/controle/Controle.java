@@ -8,7 +8,7 @@ public class Controle {
 
     @GetMapping("/")
     public String index(){
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
