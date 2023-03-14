@@ -16,11 +16,6 @@ public class Controle {
         return "login";
     }
 
-    @GetMapping("/cadastro")
-    public String cadastrar(){
-        return "cadastro";
-    }
-
     @GetMapping("/home")
     public String home(){
         return "home";

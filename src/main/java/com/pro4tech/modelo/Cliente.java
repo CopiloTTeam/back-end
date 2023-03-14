@@ -36,11 +36,8 @@ public class Cliente {
     @Column
     private String estado;
 
-    @Column
+    @Column 
     private String email;
-
-    @Column
-    private String senha;
 
 
     public Long getId_cliente() {
@@ -76,11 +73,11 @@ public class Cliente {
     }
 
     public String getLodradouro() {
-        return this.lodradouro;
+        return this.logradouro;
     }
 
     public void setLodradouro(String lodradouro) {
-        this.lodradouro = lodradouro;
+        this.logradouro = lodradouro;
     }
 
     public String getBairro() {
@@ -114,14 +111,5 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getSenha() {
-        return this.senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
     
 }

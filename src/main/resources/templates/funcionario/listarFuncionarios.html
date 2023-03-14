@@ -40,6 +40,8 @@
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Cargo</th>
+                <th>Email</th>
+                <th>Senha</th>
                 <th>Atualizar</th>
                 <th>Deletar</th>
             </tr>
@@ -50,6 +52,8 @@
                 <td th:text="${funcionario.nome}"></td>
                 <td th:text="${funcionario.cpf}"></td>
                 <td th:text="${funcionario.cargo}"></td>
+                <td th:text="${funcionario.email}"></td>
+                <td th:text="${funcionario.senha}"></td>
                 <td>
                     <a href="/atualizar/funcionario" th:href=@{/atualizar/funcionario/{funcionarioid}(funcionarioid=${funcionario.id})}>Atualizar</a>
                 </td>

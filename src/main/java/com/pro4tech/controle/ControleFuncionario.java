@@ -46,6 +46,8 @@ public class ControleFuncionario {
         funcionarioAtualizado.setNome(funcionario.getNome());
         funcionarioAtualizado.setCpf(funcionario.getCpf());
         funcionarioAtualizado.setCargo(funcionario.getCargo());
+        funcionarioAtualizado.setEmail(funcionario.getEmail());
+        funcionarioAtualizado.setSenha(funcionario.getSenha());
         repositorio.save(funcionarioAtualizado);
         return "redirect:/listar/funcionarios";
     }

@@ -51,7 +51,6 @@ public class ControleCliente {
         clienteAtualizado.setCidade(cliente.getCidade());
         clienteAtualizado.setEstado(cliente.getEstado());
         clienteAtualizado.setEmail(cliente.getEmail());
-        clienteAtualizado.setSenha(cliente.getSenha());
         repositorio.save(clienteAtualizado);
         return "redirect:/listar/clientes";
     }
