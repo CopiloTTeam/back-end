@@ -24,7 +24,7 @@ public class ControleTitulo {
     @PostMapping("/cadastrar/titulo")
     public String cadastrarTitulo(@ModelAttribute Titulo titulo){
         repositorio.save(titulo);
-        return "redirect:/listarTitulos";
+        return "redirect:/listar/titulos";
     }
 
     @GetMapping("/listar/titulos")
@@ -33,22 +33,29 @@ public class ControleTitulo {
         return "titulo/listarTitulos";
     }
 
-    @GetMapping("/atualizar/titulo/{id}")
-    public String atualizarTitulo(@PathVariable("id") long id, Model model){
-        Titulo titulo = repositorio.findById(id).get();
+    @GetMapping("/atualizar/titulo/{id_titulo}")
+    public String atualizarTitulo(@PathVariable("id_titulo") long id_titulo, Model model){
+        Titulo titulo = repositorio.findById(id_titulo).get();
         model.addAttribute("titulo", titulo);
         return "titulo/atualizarTitulo";
     }
 
-    // @PostMapping("/atualizar/titulo/{id}")
-    // public String atualizarTitulo(@PathVariable("id") long id, @ModelAttribute Titulo titulo){
-    //     Titulo tituloAtualizado = repositorio.findById(titulo.getId()).get();
-    //     tituloAtualizado.setNome(titulo.getNome());
-    //     tituloAtualizado.setCpf(titulo.getCpf());
-    //     tituloAtualizado.setCep(titulo.getCep());
-    //     repositorio.save(tituloAtualizado);
-    //     return "redirect:/listar/titulos";
-    // }
+    @PostMapping("/atualizar/titulo/{id_titulo}")
+    public String atualizarTitulo(@PathVariable("id_titulo") long id_titulo, @ModelAttribute Titulo titulo){
+        Titulo tituloAtualizado = repositorio.findById(titulo.getId_titulo()).get();
+        tituloAtualizado.setParcelas(titulo.getParcelas());
+        tituloAtualizado.setId_funcionario(titulo.getId_funcionario());
+        tituloAtualizado.setId_cliente(titulo.getId_cliente());
+        tituloAtualizado.setData_geracao(titulo.getData_geracao());
+        tituloAtualizado.setData_vencimento(titulo.getData_vencimento());
+        tituloAtualizado.setValor(titulo.getValor());
+        tituloAtualizado.setCodigo_barra(titulo.getCodigo_barra());
+        tituloAtualizado.setQr_code(titulo.getQr_code());
+        tituloAtualizado.setNumero_boleto(titulo.getNumero_boleto());
+        tituloAtualizado.setNome_produto(titulo.getNome_produto());
+        repositorio.save(tituloAtualizado);
+        return "redirect:/listar/titulos";
+    }
 
     @GetMapping("/deletar/titulo/{id}")
     public String deletarTitulo(@PathVariable("id") long id){

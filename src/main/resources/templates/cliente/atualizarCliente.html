@@ -16,7 +16,7 @@
 
     </br></br>
 
-    <form th:action="@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}" th:object="${cliente}" method="post">
+    <form th:action="@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id_cliente})}" th:object="${cliente}" method="post">
         <label for="nome">Nome: </label>
         <input type="text" th:field="*{nome}">
         </br>
@@ -26,6 +26,24 @@
         <label for="cep">CEP: </label>
         <input type="text" th:field="*{cep}">
         </br>
+        <label for="logradouro">Logradouro: </label>
+        <input type="text" th:field="*{logradouro}">
+        </br>
+        <label for="bairro">Bairro: </label>
+        <input type="text" th:field="*{bairro}">
+        </br>
+        <label for="cidade">Cidade: </label>
+        <input type="text" th:field="*{cidade}">
+        </br>
+        <label for="estado">Estado: </label>
+        <input type="text" th:field="*{estado}">
+        </br>
+        <label for="email">Email: </label>
+        <input type="text" th:field="*{email}">
+        </br>
+        <label for="senha">Senha: </label>
+        <input type="text" th:field="*{senha}">
+
         <button type="submit">Cadastrar</button>
     </form>
 </body>

@@ -26,35 +26,49 @@
 </head>
 
 <body>
-    <h1>Funcionarios</h1>
-    <a href="/">Home</a>
-    <a href="/cadastrar/cliente">Cadastro</a>
-    <a href="/listar/clientes">Clientes</a>
+    <h1>Titulos</h1>
+    <a href="/home">Home</a>
+    <a href="/cadastrar/titulo">Cadastro</a>
+    <a href="/listar/titulos">Titulos</a>
 
     </br></br>
 
     <table>
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>CEP</th>
+                <th>ID_titulo</th>
+                <th>Parcelas</th>
+                <th>Id_funcionario</th>
+                <th>Id_cliente</th>
+                <th>data_geracao</th>
+                <th>data_vencimento</th>
+                <th>valor</th>
+                <th>codigo_barra</th>
+                <th>qr_code</th>
+                <th>numero_boleto</th>
+                <th>nome_produto</th>
                 <th>Atualizar</th>
                 <th>Deletar</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="cliente : ${clientes}">
-                <td th:text="${cliente.id}"></td>
-                <td th:text="${cliente.nome}"></td>
-                <td th:text="${cliente.cpf}"></td>
-                <td th:text="${cliente.cep}"></td>
+            <tr th:each="titulo : ${titulos}">
+                <td th:text="${titulo.id_titulo}"></td>
+                <td th:text="${titulo.parcelas}"></td>
+                <td th:text="${titulo.id_funcionario}"></td>
+                <td th:text="${titulo.id_cliente}"></td>
+                <td th:text="${titulo.data_geracao}"></td>
+                <td th:text="${titulo.data_vencimento}"></td>
+                <td th:text="${titulo.valor}"></td>
+                <td th:text="${titulo.codigo_barra}"></td>
+                <td th:text="${titulo.qr_code}"></td>
+                <td th:text="${titulo.numero_boleto}"></td>
+                <td th:text="${titulo.nome_produto}"></td>
                 <td>
-                    <a href="/atualizar/cliente" th:href=@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}>Atualizar</a>
+                    <a href="/atualizar/titulo" th:href=@{/atualizar/titulo/{tituloid}(tituloid=${titulo.id_titulo})}>Atualizar</a>
                 </td>
                 <td>
-                    <a href="/deletar/cliente" th:href=@{/deletar/cliente/{clienteid}(clienteid=${cliente.id})}>Deletar</a>
+                    <a href="/deletar/titulo" th:href=@{/deletar/titulo/{tituloid}(tituloid=${titulo.id_titulo})}>Deletar</a>
                 </td>
             </tr>
         </tbody>

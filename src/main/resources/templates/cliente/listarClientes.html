@@ -40,21 +40,31 @@
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>CEP</th>
+                <th>Logradouro</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Email</th>
                 <th>Atualizar</th>
                 <th>Deletar</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="cliente : ${clientes}">
-                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.id_cliente}"></td>
                 <td th:text="${cliente.nome}"></td>
                 <td th:text="${cliente.cpf}"></td>
                 <td th:text="${cliente.cep}"></td>
+                <td th:text="${cliente.logradouro}"></td>
+                <td th:text="${cliente.bairro}"></td>
+                <td th:text="${cliente.cidade}"></td>
+                <td th:text="${cliente.estado}"></td>
+                <td th:text="${cliente.email}"></td>
                 <td>
-                    <a href="/atualizar/cliente" th:href=@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id})}>Atualizar</a>
+                    <a href="/atualizar/cliente" th:href=@{/atualizar/cliente/{clienteid}(clienteid=${cliente.id_cliente})}>Atualizar</a>
                 </td>
                 <td>
-                    <a href="/deletar/cliente" th:href=@{/deletar/cliente/{clienteid}(clienteid=${cliente.id})}>Deletar</a>
+                    <a href="/deletar/cliente" th:href=@{/deletar/cliente/{clienteid}(clienteid=${cliente.id_cliente})}>Deletar</a>
                 </td>
             </tr>
         </tbody>

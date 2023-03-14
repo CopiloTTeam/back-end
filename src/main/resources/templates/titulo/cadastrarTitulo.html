@@ -9,23 +9,43 @@
 </head>
 
 <body>
-    <h1>Cadastro - Funcionario</h1>
-    <a href="/">Home</a>
-    <a href="/cadastrar/cliente">Cadastro</a>
-    <a href="/listar/clientes">Clientes</a>
+    <h1>Cadastro - Titulos</h1>
+    <a href="/home">Home</a>
+    <a href="/cadastrar/titulo">Cadastro</a>
+    <a href="/listar/titulos">Titulos</a>
 
     </br></br>
 
-    <form th:action="@{/cadastrar/cliente}" th:object="${cliente}" method="post">
-        <label for="nome">Nome: </label>
-        <input type="text" th:field="*{nome}">
-        </br>
-        <label for="cpf">CPF: </label>
-        <input type="text" th:field="*{cpf}">
-        </br>
-        <label for="cep">CEP: </label>
-        <input type="text" th:field="*{cep}">
-        </br>
+    <form th:action="@{/cadastrar/titulo}" th:object="${titulo}" method="post">
+        <label for="parcelas">Parcelas: </label>
+        <input type="text" id="parcelas" name="parcelas" th:value="${titulo.parcelas}" />
+        </br></br>
+        <label for="id_funcionario">Id_funcionario: </label>
+        <input type="text" id="id_funcionario" name="id_funcionario" th:value="${titulo.id_funcionario}" />
+        </br></br>
+        <label for="id_cliente">Id_cliente: </label>
+        <input type="text" id="id_cliente" name="id_cliente" th:value="${titulo.id_cliente}" />
+        </br></br>
+        <label for="data_geracao">Data_geracao: </label>
+        <input type="text" id="data_geracao" name="data_geracao" th:value="${titulo.data_geracao}" />
+        </br></br>
+        <label for="data_vencimento">Data_vencimento: </label>
+        <input type="text" id="data_vencimento" name="data_vencimento" th:value="${titulo.data_vencimento}" />
+        </br></br>
+        <label for="valor">Valor: </label>
+        <input type="text" id="valor" name="valor" th:value="${titulo.valor}" />
+        </br></br>
+        <label for="codigo_barra">Codigo_barra: </label>
+        <input type="text" id="codigo_barra" name="codigo_barra" th:value="${titulo.codigo_barra}" />
+        </br></br>
+        <label for="qr_code">Qr_code: </label>
+        <input type="text" id="qr_code" name="qr_code" th:value="${titulo.qr_code}" />
+        </br></br>
+        <label for="numero_boleto">Numero_boleto: </label>
+        <input type="text" id="numero_boleto" name="numero_boleto" th:value="${titulo.numero_boleto}" />
+        </br></br>
+        <label for="nome_produto">Nome_produto: </label>
+        <input type="text" id="nome_produto" name="nome_produto" th:value="${titulo.nome_produto}" />
         <button type="submit">Cadastrar</button>
     </form>
 </body>

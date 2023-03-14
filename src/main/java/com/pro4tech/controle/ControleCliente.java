@@ -24,7 +24,7 @@ public class ControleCliente {
     @PostMapping("/cadastrar/cliente")
     public String cadastrarCliente(@ModelAttribute Cliente cliente){
         repositorio.save(cliente);
-        return "redirect:/listarClientes";
+        return "redirect:/listar/clientes";
     }
 
     @GetMapping("/listar/clientes")
@@ -33,26 +33,32 @@ public class ControleCliente {
         return "cliente/listarClientes";
     }
 
-    @GetMapping("/atualizar/cliente/{id}")
-    public String atualizarCliente(@PathVariable("id") long id, Model model){
-        Cliente cliente = repositorio.findById(id).get();
+    @GetMapping("/atualizar/cliente/{id_cliente}")
+    public String atualizarCliente(@PathVariable("id_cliente") long id_cliente, Model model){
+        Cliente cliente = repositorio.findById(id_cliente).get();
         model.addAttribute("cliente", cliente);
         return "cliente/atualizarCliente";
     }
 
-    @PostMapping("/atualizar/cliente/{id}")
-    public String atualizarCliente(@PathVariable("id") long id, @ModelAttribute Cliente cliente){
-        Cliente clienteAtualizado = repositorio.findById(cliente.getId()).get();
+    @PostMapping("/atualizar/cliente/{id_cliente}")
+    public String atualizarCliente(@PathVariable("id_cliente") long id_cliente, @ModelAttribute Cliente cliente){
+        Cliente clienteAtualizado = repositorio.findById(cliente.getId_cliente()).get();
         clienteAtualizado.setNome(cliente.getNome());
         clienteAtualizado.setCpf(cliente.getCpf());
         clienteAtualizado.setCep(cliente.getCep());
+        clienteAtualizado.setLogradouro(cliente.getLogradouro());
+        clienteAtualizado.setBairro(cliente.getBairro());
+        clienteAtualizado.setCidade(cliente.getCidade());
+        clienteAtualizado.setEstado(cliente.getEstado());
+        clienteAtualizado.setEmail(cliente.getEmail());
+        clienteAtualizado.setSenha(cliente.getSenha());
         repositorio.save(clienteAtualizado);
         return "redirect:/listar/clientes";
     }
 
-    @GetMapping("/deletar/cliente/{id}")
-    public String deletarCliente(@PathVariable("id") long id){
-        Cliente cliente = repositorio.findById(id).get();
+    @GetMapping("/deletar/cliente/{id_cliente}")
+    public String deletarCliente(@PathVariable("id_cliente") long id_cliente){
+        Cliente cliente = repositorio.findById(id_cliente).get();
         repositorio.delete(cliente);
         return "redirect:/listar/clientes";
     }

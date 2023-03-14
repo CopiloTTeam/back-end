@@ -13,7 +13,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_cliente;
 
     @Column
     private String nome;
@@ -25,15 +25,30 @@ public class Cliente {
     private String cep;
 
     @Column
-    private String endereco;
+    private String logradouro;
+
+    @Column
+    private String bairro;
+
+    @Column
+    private String cidade;
+
+    @Column
+    private String estado;
+
+    @Column
+    private String email;
+
+    @Column
+    private String senha;
 
 
-    public Long getId() {
-        return this.id;
+    public Long getId_cliente() {
+        return this.id_cliente;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_cliente(Long id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getNome() {
@@ -60,13 +75,53 @@ public class Cliente {
         this.cep = cep;
     }
 
-    public String getEndereco() {
-        return this.endereco;
+    public String getLodradouro() {
+        return this.lodradouro;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setLodradouro(String lodradouro) {
+        this.lodradouro = lodradouro;
     }
 
+    public String getBairro() {
+        return this.bairro;
+    }
 
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return this.cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    
 }

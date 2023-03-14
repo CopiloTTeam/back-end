@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BancoApplication {
+public class App {
 
 	public static void main(String[] args) {
 		/*
@@ -40,7 +40,7 @@ public class BancoApplication {
 		configuracao.put("spring.jpa.show-sql", "true"); // mostrar comandos
 		configuracao.put("spring.jpa.hibernate.ddl-auto", "update"); // criar editar
 		
-		SpringApplication app = new SpringApplication(BancoApplication.class);
+		SpringApplication app = new SpringApplication(App.class);
 		app.setDefaultProperties(configuracao);
 		app.run(args);
 	}
