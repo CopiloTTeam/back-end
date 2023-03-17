@@ -46,13 +46,21 @@ public class Controle {
 
     @GetMapping("/home")
     public String home(HttpServletRequest request){
+       
+        if(CookieService.getCookie(request) == null){
+            return "redirect:/login";
+        }
+        return "home";
         // if( CookieService.getCookie(request, null) == null){
-        //     return "redirect:/login";
+         
+       
+        //     return "redirect:/login";   
         // }else{
         //     return "home";
-        System.out.println(CookieService.getCookie(request, null));
+       
         // }
-        return "home";
+       
+        // return "home";
     }
 
 }

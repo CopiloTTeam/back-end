@@ -15,8 +15,16 @@ public class CookieService {
         response.addCookie(cookie);
     }
 
-    public static String getCookie(HttpServletRequest request , String key){
-        return Optional.ofNullable(request.getCookies()).flatMap(cookies -> Arrays.stream(cookies).filter(cookie -> cookie.getName().equals(key)).findFirst()).map(Cookie::getValue).orElse(null);
+    public static String getCookie(HttpServletRequest request ){
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            Optional<Cookie> cookie = Arrays.stream(cookies).filter(c -> c.getName().equals("usuario")).findFirst();
+            if(cookie.isPresent()){
+                return cookie.get().getValue();
+            }
+        }
+        return null;    
+
 
     }
 }

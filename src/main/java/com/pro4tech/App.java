@@ -32,7 +32,7 @@ public class App {
 		
 		// 3.2 Usuário e senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "admin"); // senha
+		configuracao.put("spring.datasource.password", "fatec"); // senha
 		
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir diretamento com o banco
