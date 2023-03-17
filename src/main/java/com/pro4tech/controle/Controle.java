@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.pro4tech.modelo.Funcionario;
 import com.pro4tech.repositorio.RepositorioFuncionario;
 
-import ch.qos.logback.core.model.Model;
+import Servico.CookieService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+
 
 @Controller
 public class Controle {
@@ -28,19 +32,26 @@ public class Controle {
     }
 
     @PostMapping("/logar")
-    public String logar(@ModelAttribute Funcionario funcionario){
+    public String logar(@ModelAttribute Funcionario funcionario , HttpServletResponse response){
         String email = funcionario.getEmail();
         String senha = funcionario.getSenha();
         Funcionario funcionarioLogado = rep.findByEmailAndSenha(email, senha);
 
         if(funcionarioLogado != null){
+            CookieService.setCookie(response," 123", funcionarioLogado.getId().toString(),10);
             return "redirect:/home";
         }
         return "redirect:/login";
     }
 
     @GetMapping("/home")
-    public String home(){
+    public String home(HttpServletRequest request){
+        // if( CookieService.getCookie(request, null) == null){
+        //     return "redirect:/login";
+        // }else{
+        //     return "home";
+        System.out.println(CookieService.getCookie(request, null));
+        // }
         return "home";
     }
 
