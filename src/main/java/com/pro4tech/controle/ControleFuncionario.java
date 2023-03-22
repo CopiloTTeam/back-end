@@ -21,22 +21,33 @@ public class ControleFuncionario {
     @Autowired
     private PasswordEncoder encoder;
 
-
+    // ROTA PARA CADASTRAR FUNCIONARIOS
     @PostMapping("/cadastrar/funcionario")
     public ResponseEntity<Funcionario> cadastrarFuncionario(@RequestBody Funcionario funcionario) {
+        // Pega a senha e Encripta
         funcionario.setSenha(encoder.encode(funcionario.getSenha()));
+        //Salva tudo vindo na url no repo
         return ResponseEntity.ok(repositorio.save(funcionario));
     }
+
+    // ROTA PARA VALIDAR SENHA
     @GetMapping("/validarSenha")
     public ResponseEntity<Boolean> validarSenha(@RequestParam String email,
                                                 @RequestParam String senha){
+        // Optional significa que pode estar vazio ou não
+        //Procura email no repositorio se não achar fica vazio
         Optional<Funcionario> Optfunc = repositorio.findByEmail(email);
         if (Optfunc.isEmpty()){
+            //se vazio retorna codigo de não autorizado e false;
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
+        //se Não está vazio, pega o funcionario
         Funcionario funcionario = Optfunc.get();
+        //se a senha bater com a do banco de dados retorna true na variavel, se não, false
         boolean valid = encoder.matches((senha), funcionario.getSenha());
+        //define status a partir da variavel valid
         HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+        //faz o return final com o codigo de status e o corpo da requisição
         return ResponseEntity.status(status).body(valid);
     }
 
