@@ -24,7 +24,7 @@ public class Funcionario {
     @Column
     private String cargo;
 
-    @Column
+    @Column(unique = true)
     private String email;
 
     @Column

@@ -20,12 +20,16 @@ public class ControleCliente {
         model.addAttribute("cliente", new Cliente());
         return "cliente/cadastrarCliente";
     }
+    //vai embora
 
     @PostMapping("/cadastrar/cliente")
     public String cadastrarCliente(@ModelAttribute Cliente cliente){
         repositorio.save(cliente);
         return "redirect:/listar/clientes";
     }
+    //pega token, se estiver valido
+    //recebe informações e cadastra, codigo 201 - ok
+    //se não codigo 401 - usuário não autenticado
 
     @GetMapping("/listar/clientes")
     public String listarClientes(Model model){
@@ -33,12 +37,20 @@ public class ControleCliente {
         return "cliente/listarClientes";
     }
 
+    //pega token se estiver valido
+    //codigo 202 e retorna json com dados
+    //se não codigo 401 - usuário não autenticado
+
     @GetMapping("/atualizar/cliente/{id_cliente}")
     public String atualizarCliente(@PathVariable("id_cliente") long id_cliente, Model model){
         Cliente cliente = repositorio.findById(id_cliente).get();
         model.addAttribute("cliente", cliente);
         return "cliente/atualizarCliente";
     }
+
+    //pega token se estiver valido
+    //codigo 202 e retorna json com dados
+    //se não codigo 401 - usuário não autenticado
 
     @PostMapping("/atualizar/cliente/{id_cliente}")
     public String atualizarCliente(@PathVariable("id_cliente") long id_cliente, @ModelAttribute Cliente cliente){
@@ -54,6 +66,9 @@ public class ControleCliente {
         repositorio.save(clienteAtualizado);
         return "redirect:/listar/clientes";
     }
+    //pega token,se valido
+    //codigo 202 - retorn json de cadastrado ou 400 e return de json com erro
+    //se não codigo 401 - usuasrio não autenticado
 
     @GetMapping("/deletar/cliente/{id_cliente}")
     public String deletarCliente(@PathVariable("id_cliente") long id_cliente){
@@ -61,5 +76,9 @@ public class ControleCliente {
         repositorio.delete(cliente);
         return "redirect:/listar/clientes";
     }
+
+    //pega token, se valido
+    ///cod 202 e retorna json vazio ou 400 e return de json com erro
+    //se não cod 401 - usuário não autenticado
 
 }
