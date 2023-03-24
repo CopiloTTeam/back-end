@@ -1,5 +1,7 @@
 package com.pro4tech.controle;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,40 +11,25 @@ import com.pro4tech.modelo.Titulo;
 import com.pro4tech.repositorio.RepositorioTitulo;
 
 
-@Controller
+@RestController
 public class ControleTitulo {
     
     @Autowired
     private RepositorioTitulo repositorio;
 
-    @GetMapping("/cadastrar/titulo")
-    public String cadastroTitulo(Model model){
-        model.addAttribute("titulo", new Titulo());
-        return "titulo/cadastrarTitulo";
+    @GetMapping("/listar/titulo")
+    public List<Titulo> cadastroTitulo(){
+        return repositorio.findAll();
     }
 
     @PostMapping("/cadastrar/titulo")
-    public String cadastrarTitulo(@ModelAttribute Titulo titulo){
-        repositorio.save(titulo);
-        return "redirect:/listar/titulos";
+    public Titulo cadastrarTitulo(@RequestBody Titulo titulo){
+        return repositorio.save(titulo);
     }
 
-    @GetMapping("/listar/titulos")
-    public String listarTitulos(Model model){
-        model.addAttribute("titulos", repositorio.findAll());
-        return "titulo/listarTitulos";
-    }
-
-    @GetMapping("/atualizar/titulo/{id_titulo}")
-    public String atualizarTitulo(@PathVariable("id_titulo") long id_titulo, Model model){
-        Titulo titulo = repositorio.findById(id_titulo).get();
-        model.addAttribute("titulo", titulo);
-        return "titulo/atualizarTitulo";
-    }
-
-    @PostMapping("/atualizar/titulo/{id_titulo}")
-    public String atualizarTitulo(@PathVariable("id_titulo") long id_titulo, @ModelAttribute Titulo titulo){
-        Titulo tituloAtualizado = repositorio.findById(titulo.getId_titulo()).get();
+    @PutMapping("/atualizar/titulo/{id_titulo}")
+    public Titulo atualizarTitulo(@PathVariable("id_titulo") long id_titulo, @ModelAttribute Titulo titulo){
+        Titulo tituloAtualizado = repositorio.findById(id_titulo).get();
         tituloAtualizado.setParcelas(titulo.getParcelas());
         tituloAtualizado.setId_funcionario(titulo.getId_funcionario());
         tituloAtualizado.setId_cliente(titulo.getId_cliente());
@@ -53,15 +40,12 @@ public class ControleTitulo {
         tituloAtualizado.setQr_code(titulo.getQr_code());
         tituloAtualizado.setNumero_boleto(titulo.getNumero_boleto());
         tituloAtualizado.setNome_produto(titulo.getNome_produto());
-        repositorio.save(tituloAtualizado);
-        return "redirect:/listar/titulos";
+        return repositorio.save(tituloAtualizado);
     }
 
-    @GetMapping("/deletar/titulo/{id}")
-    public String deletarTitulo(@PathVariable("id") long id){
-        Titulo titulo = repositorio.findById(id).get();
-        repositorio.delete(titulo);
-        return "redirect:/listar/titulos";
+    @DeleteMapping("/deletar/titulo/{id}")
+    public void deletarTitulo(@PathVariable("id") long id){
+        repositorio.delete(repositorio.findById(id).get());
     }
 
 }
