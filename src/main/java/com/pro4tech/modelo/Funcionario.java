@@ -1,10 +1,12 @@
 package com.pro4tech.modelo;
 
+// import io.micrometer.common.lang.NonNull;    
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -18,16 +20,16 @@ public class Funcionario {
     @Column
     private String nome;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @Column
     private String cargo;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String senha;
 
     public Long getId() {
