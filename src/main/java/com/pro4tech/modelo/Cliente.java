@@ -18,7 +18,7 @@ public class Cliente {
     @Column
     private String nome;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @Column
@@ -36,7 +36,7 @@ public class Cliente {
     @Column
     private String estado;
 
-    @Column 
+    @Column(nullable = false)
     private String email;
 
 

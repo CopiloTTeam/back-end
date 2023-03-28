@@ -23,6 +23,11 @@ public class ControleFuncionario {
     @PostMapping("/funcionarios/cadastrar")
     public ResponseEntity<?> cadastrarFuncionario(@RequestBody Funcionario funcionario) {
         try {
+            // Verifica se já existe algum funcionário com o mesmo CPF cadastrado
+            if (repositorio.findByCpf(funcionario.getCpf()).isPresent()) {
+                return new ResponseEntity<>("Já existe um funcionário com o mesmo CPF cadastrado",
+                        HttpStatus.BAD_REQUEST);
+            }
             var funcionarioSalvo = repositorio.save(funcionario);
             return new ResponseEntity<>(funcionarioSalvo, HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
@@ -66,7 +71,8 @@ public class ControleFuncionario {
             if (consulta.isPresent()) {
                 Funcionario funcionarioAtualizado = consulta.get();
                 if (funcionario.getCpf() != null) {
-                    Optional<Funcionario> funcionarioComMesmoCpf = repositorio.findByCpfAndIdNot(funcionario.getCpf(), id);
+                    Optional<Funcionario> funcionarioComMesmoCpf = repositorio.findByCpfAndIdNot(funcionario.getCpf(),
+                            id);
                     if (funcionarioComMesmoCpf.isPresent()) {
                         return ResponseEntity.status(HttpStatus.CONFLICT)
                                 .body("Não é possível atualizar o funcionário devido a uma entrada duplicada.");
@@ -99,20 +105,20 @@ public class ControleFuncionario {
     }
 
     @DeleteMapping("/deletar/funcionario/{id}")
-public ResponseEntity<String> deletarFuncionario(@PathVariable("id") long id) {
-    try {
-        var consulta = repositorio.findById(id);
-        if (consulta.isPresent()) {
-            repositorio.delete(consulta.get());
-            return ResponseEntity.ok("Funcionário deletado com sucesso.");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Funcionário não encontrado com o ID informado");
+    public ResponseEntity<String> deletarFuncionario(@PathVariable("id") long id) {
+        try {
+            var consulta = repositorio.findById(id);
+            if (consulta.isPresent()) {
+                repositorio.delete(consulta.get());
+                return ResponseEntity.ok("Funcionário deletado com sucesso.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Funcionário não encontrado com o ID informado");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocorreu um erro ao deletar o funcionário: " + e.getMessage());
         }
-    } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Ocorreu um erro ao deletar o funcionário: " + e.getMessage());
     }
-}
 
 }
