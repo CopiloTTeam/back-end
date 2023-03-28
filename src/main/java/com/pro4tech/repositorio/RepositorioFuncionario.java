@@ -14,5 +14,7 @@ import com.pro4tech.modelo.Funcionario;
 public interface RepositorioFuncionario extends JpaRepository<Funcionario, Long>{
 
     Optional<Funcionario> findByEmailAndSenha(String email, String senha);
+
+    Optional<Funcionario> findByCpfAndIdNot(String cpf, Long id);
    
 }
