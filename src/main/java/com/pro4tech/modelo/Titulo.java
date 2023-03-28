@@ -14,13 +14,13 @@ public class Titulo {
 	private Long id_titulo;
 
 	@Column
-	private int parcelas;
+	private Integer parcelas;
 
-	@Column
-	private int id_funcionario;
+	@Column(nullable = false)
+	private Long id_funcionario;
 
-	@Column
-	private int id_cliente;
+	@Column(nullable = false)
+	private Long id_cliente;
 
 	@Column
 	private String data_geracao;
@@ -29,7 +29,7 @@ public class Titulo {
 	private String data_vencimento;
 
 	@Column
-	private int valor;
+	private Float valor;
 
 	@Column
 	private String codigo_barra;
@@ -52,27 +52,27 @@ public class Titulo {
 		this.id_titulo = id_titulo;
 	}
 
-	public int getParcelas() {
+	public Integer getParcelas() {
 		return this.parcelas;
 	}
 
-	public void setParcelas(int parcelas) {
+	public void setParcelas(Integer parcelas) {
 		this.parcelas = parcelas;
 	}
 
-	public int getId_funcionario() {
+	public Long getId_funcionario() {
 		return this.id_funcionario;
 	}
 
-	public void setId_funcionario(int id_funcionario) {
+	public void setId_funcionario(Long id_funcionario) {
 		this.id_funcionario = id_funcionario;
 	}
 
-	public int getId_cliente() {
+	public Long getId_cliente() {
 		return this.id_cliente;
 	}
 
-	public void setId_cliente(int id_cliente) {
+	public void setId_cliente(Long id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 
@@ -92,11 +92,11 @@ public class Titulo {
 		this.data_vencimento = data_vencimento;
 	}
 
-	public int getValor() {
+	public Float getValor() {
 		return this.valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(Float valor) {
 		this.valor = valor;
 	}
 
