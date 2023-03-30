@@ -24,9 +24,9 @@ public class Controle {
             String senha = (String) json.get("senha");
             var funcionarioo = rep.findByEmailAndSenha(email, senha);
             if (funcionarioo.isPresent()) {
-                return new ResponseEntity<>(funcionarioo.get(), HttpStatus.OK);
+                return new ResponseEntity<>(funcionarioo.get().getId_funcionario(), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Funcionario não cadastrado", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao fazer login", HttpStatus.INTERNAL_SERVER_ERROR);
