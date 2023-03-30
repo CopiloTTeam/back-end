@@ -25,7 +25,7 @@ public class App {
 		// Por padrão a porta é 8080
 		// configuracao.put("server.port", "8080"); 
 		// seleção da porta
-		configuracao.put("server.port", "5706"); 
+		configuracao.put("server.port", "8080"); 
 		// seleção da porta
 
 
@@ -35,7 +35,7 @@ public class App {
 		// caminho da conexão
 		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech");	 
 		// PRODUÇÃO
-		configuracao.put("spring.datasource.url", "jdbc:mysql://LG5j4sqzDUA1OF3SqKI3@containers-us-west-189.railway.app:5706/pro4tech"); 
+		configuracao.put("spring.datasource.url", "jdbc:mysql://containers-us-west-189.railway.app:5706/pro4tech"); 
 		
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root"); 
