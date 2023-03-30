@@ -23,16 +23,27 @@ public class App {
 		// 2. Configuração para trocar de porta.
 		// Nesta configuração você pode escolher a porta que o servidor web será executado.
 		// Por padrão a porta é 8080
-		configuracao.put("server.port", "8080"); // seleção da porta
+		// configuracao.put("server.port", "8080"); 
+		// seleção da porta
+		configuracao.put("server.port", "5706"); 
+		// seleção da porta
+
 
 		// 3. Configurações do banco de dados mysql
 		// 3.1 A URL de conexão é o caminho onde spring irá tentar conectar com o banco.
 		// Este caminho é uma URL, porque o banco não é um arquivo é um sistema, que pode inclusive estar em "nuvem"
-		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // caminho da conexão
+		// caminho da conexão
+		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech");	 
+		// PRODUÇÃO
+		configuracao.put("spring.datasource.url", "jdbc:mysql://root:LG5j4sqzDUA1OF3SqKI3@containers-us-west-189.railway.app:5706/pro4tech"); 
 		
 		// 3.2 Usuário e senha
+		// configuracao.put("spring.datasource.username", "root"); 
+		// usuario
+		// configuracao.put("spring.datasource.password", "fatec"); 
+		// senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "fatec"); // senha
+		configuracao.put("spring.datasource.password", "LG5j4sqzDUA1OF3SqKI3"); // senha
 		
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir diretamento com o banco
