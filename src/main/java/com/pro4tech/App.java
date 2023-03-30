@@ -35,7 +35,7 @@ public class App {
 		// caminho da conexão
 		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech");	 
 		// PRODUÇÃO
-		configuracao.put("spring.datasource.url", "jdbc:mysql://root:LG5j4sqzDUA1OF3SqKI3@containers-us-west-189.railway.app:5706/pro4tech"); 
+		configuracao.put("spring.datasource.url", "jdbc:mysql://LG5j4sqzDUA1OF3SqKI3@containers-us-west-189.railway.app:5706/pro4tech"); 
 		
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root"); 
