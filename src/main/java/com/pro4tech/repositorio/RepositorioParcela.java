@@ -3,9 +3,9 @@ package com.pro4tech.repositorio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.pro4tech.modelo.Titulo;
+import com.pro4tech.modelo.Parcela;
 
 @Repository
-public interface RepositorioTitulo extends JpaRepository<Titulo, Long>{
-
+public interface RepositorioParcela extends JpaRepository<Parcela, Long>{
+    
 }

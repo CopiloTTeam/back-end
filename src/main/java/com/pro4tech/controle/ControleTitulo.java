@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.pro4tech.modelo.Parcela;
 import com.pro4tech.modelo.Titulo;
+import com.pro4tech.repositorio.RepositorioParcela;
 import com.pro4tech.repositorio.RepositorioTitulo;
 
 @RestController
@@ -18,6 +18,8 @@ public class ControleTitulo {
 
     @Autowired
     private RepositorioTitulo repositorio;
+    @Autowired
+    private RepositorioParcela repositorioParcela;
 
     @GetMapping("/listar/titulo")
     public ResponseEntity<?> cadastroTitulo() {
@@ -55,7 +57,22 @@ public class ControleTitulo {
     public ResponseEntity<?> cadastrarTitulo(@RequestBody Titulo titulo) {
         try {
             Titulo novoTitulo = repositorio.save(titulo);
+            Integer parcelas = novoTitulo.getParcelas();
+            for (int i = 1; i <= parcelas; i++) {
+                Parcela parcela = new Parcela();
+                parcela.setId_titulo(novoTitulo.getId_titulo());
+                parcela.setId_cliente(novoTitulo.getId_cliente());
+                parcela.setData_vencimento(null);
+                parcela.setData_pagamento(null);
+                parcela.setData_credito(null);
+                parcela.setStatus(false);
+                parcela.setValor((double) (novoTitulo.getValor() / parcelas));
+                parcela.setValor_pago(0.0);
+                System.out.println(parcela);
+                repositorioParcela.save(parcela);
+            }
             return ResponseEntity.ok(novoTitulo);
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Erro ao cadastrar título: " + e.getMessage());

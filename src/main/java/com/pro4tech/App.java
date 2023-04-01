@@ -36,14 +36,15 @@ public class App {
 		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech");	 
 		// PRODUÇÃO
 		configuracao.put("spring.datasource.url", "jdbc:mysql://containers-us-west-189.railway.app:5706/pro4tech"); 
-		
+		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // rodar local
+
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root"); 
 		// usuario
 		// configuracao.put("spring.datasource.password", "fatec"); 
 		// senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "LG5j4sqzDUA1OF3SqKI3"); // senha
+		configuracao.put("spring.datasource.password", "fatec"); // senha
 		
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir diretamento com o banco
