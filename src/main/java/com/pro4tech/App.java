@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class })
 public class App {
 
 	public static void main(String[] args) {
@@ -51,6 +51,7 @@ public class App {
 		// configuracao.put("spring.datasource.url", dataSource);
 		// } else {
 		configuracao.put("spring.datasource.url", "jdbc:mysql://20.169.189.236:3306/pro4tech");
+		//configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech");
 		// }
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root");
@@ -61,7 +62,7 @@ public class App {
 		// if (username != null) {
 		// configuracao.put("spring.datasource.username", username);
 		// } else {
-		configuracao.put("spring.datasource.username", "guilherme");
+		configuracao.put("spring.datasource.username", "root");
 		configuracao.put("spring.datasource.maximumLifetime", "5000000");
 		// }
 		// usuario
@@ -69,7 +70,7 @@ public class App {
 		// if (password != null) {
 		// configuracao.put("spring.datasource.password", password);
 		// } else {
-		configuracao.put("spring.datasource.password", "m0309g1004");
+		configuracao.put("spring.datasource.password", "fatec");
 		// }
 		// senha
 

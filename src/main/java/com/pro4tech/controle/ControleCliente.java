@@ -111,7 +111,7 @@ public class ControleCliente {
     public ResponseEntity<?> deletarCliente(@PathVariable("id_cliente") long id_cliente) {
         try {
             repositorio.deleteById(id_cliente);
-            return new ResponseEntity<>("Cliente deletado",     HttpStatus.OK);
+            return new ResponseEntity<>("Cliente deletado", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao deletar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
