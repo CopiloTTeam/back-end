@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class ControleTitulo {
     @Autowired
     private RepositorioTitulo repositorio;
 
+    
     @GetMapping("/listar/titulo")
     public ResponseEntity<?> cadastroTitulo() {
         try {
@@ -126,5 +128,10 @@ public class ControleTitulo {
                     .body("Erro ao deletar título: " + e.getMessage());
         }
     }
+
+
+
+
+    //DIRECT FUNCTIONS
 
 }

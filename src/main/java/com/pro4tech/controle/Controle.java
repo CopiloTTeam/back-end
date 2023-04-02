@@ -29,7 +29,7 @@ public class Controle {
             return new ResponseEntity<>("Funcionario não cadastrado", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>("Erro ao fazer login", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
