@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,12 @@ import com.pro4tech.repositorio.RepositorioFuncionario;
 
 @RestController
 public class ControleFuncionario {
+
+    private final PasswordEncoder encoder;
+
+    public ControleFuncionario(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
 
     @Autowired
     private RepositorioFuncionario repositorio;
@@ -26,6 +33,7 @@ public class ControleFuncionario {
                 return new ResponseEntity<>("Já existe um funcionário com o mesmo CPF cadastrado",
                         HttpStatus.BAD_REQUEST);
             }
+            funcionario.setSenha(encoder.encode(funcionario.getSenha()));
             var funcionarioSalvo = repositorio.save(funcionario);
             return new ResponseEntity<>(funcionarioSalvo, HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {

@@ -45,5 +45,19 @@ public class ControleParcela {
             return new ResponseEntity<>("Erro ao listar parcela", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    // crie um método para listar parcelas por id de titulo
+    @GetMapping("/listar/parcela/titulo/{id}")
+    public ResponseEntity<?> listarParcelaPorIdTitulo(@PathVariable("id") Long id) {
+        try {
+            var parcela = repositorio.findById(id);
+            if (parcela.isPresent()) {
+                return new ResponseEntity<>(parcela.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Parcela não encontrada", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erro ao listar parcela", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

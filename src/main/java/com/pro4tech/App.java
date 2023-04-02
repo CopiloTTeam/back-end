@@ -5,6 +5,10 @@ import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class App {
@@ -35,8 +39,8 @@ public class App {
 		// caminho da conexão
 		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech");	 
 		// PRODUÇÃO
-		configuracao.put("spring.datasource.url", "jdbc:mysql://containers-us-west-189.railway.app:5706/pro4tech"); 
-		// configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // rodar local
+		// configuracao.put("spring.datasource.url", "jdbc:mysql://containers-us-west-189.railway.app:5706/pro4tech"); 
+		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // rodar local
 
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root"); 
@@ -44,7 +48,7 @@ public class App {
 		// configuracao.put("spring.datasource.password", "fatec"); 
 		// senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "fatec"); // senha
+		configuracao.put("spring.datasource.password", "root"); // senha
 		
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir diretamento com o banco
@@ -56,5 +60,9 @@ public class App {
 		app.setDefaultProperties(configuracao);
 		app.run(args);
 	}
-
+	@Bean
+		public PasswordEncoder getpasswordEncoder() {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}
 }
