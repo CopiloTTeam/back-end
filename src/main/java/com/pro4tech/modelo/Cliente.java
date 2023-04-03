@@ -11,10 +11,6 @@ import lombok.Data;
 @Data
 public class Cliente {
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id_cliente;
-
     @Column
     private String nome;
 
@@ -38,15 +34,6 @@ public class Cliente {
 
     @Column(nullable = false)
     private String email;
-
-
-    public Long getId_cliente() {
-        return this.id_cliente;
-    }
-
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
-    }
 
     public String getNome() {
         return this.nome;

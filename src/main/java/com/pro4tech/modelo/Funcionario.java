@@ -11,10 +11,6 @@ import lombok.Data;
 @Data
 public class Funcionario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_funcionario;
-
     @Column
     private String nome;
 
@@ -24,19 +20,11 @@ public class Funcionario {
     @Column
     private String cargo;
 
-    @Column(nullable = false)
+    @Column(unique= true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(unique= true, nullable = false)
     private String senha;
-
-    public Long getId() {
-        return this.id_funcionario;
-    }
-
-    public void setId(Long id_funcionario) {
-        this.id_funcionario = id_funcionario;
-    }
 
     public String getNome() {
         return this.nome;

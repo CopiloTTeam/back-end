@@ -27,7 +27,7 @@ public class App {
 		// No objeto configuração são adicionados as configurações utilizadas na
 		// inicialização do sistema.
 		Map<String, Object> configuracao = new HashMap<>();
-		Dotenv dotenv = Dotenv.load();
+		// Dotenv dotenv = Dotenv.load();
 		// 2. Configuração para trocar de porta.
 		// Nesta configuração você pode escolher a porta que o servidor web será
 		// executado.
@@ -49,7 +49,7 @@ public class App {
 		// caminho da conexão
 		//
 		// PRODUÇÃO
-		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // rodar local
+		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4techteste"); // rodar local
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root");
 		// usuario

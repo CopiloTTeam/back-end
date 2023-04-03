@@ -1,10 +1,13 @@
 package com.pro4tech.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
@@ -15,8 +18,9 @@ public class Parcela {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_parcela;
 
-    @Column
-    private Long id_titulo;
+    @OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_titulo", referencedColumnName = "id_titulo")
+    private Titulo titulo;
 
     @Column
     private Long id_cliente;
@@ -49,11 +53,11 @@ public class Parcela {
     }
 
     public Long getId_titulo() {
-        return this.id_titulo;
+        return this.titulo.getId_titulo();
     }
 
     public void setId_titulo(Long id_titulo) {
-        this.id_titulo = id_titulo;
+        this.titulo.setId_titulo(id_titulo);
     }
 
     public Long getId_cliente() {

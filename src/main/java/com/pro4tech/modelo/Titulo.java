@@ -1,10 +1,14 @@
 package com.pro4tech.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Titulo {
@@ -16,11 +20,13 @@ public class Titulo {
 	@Column
 	private Integer parcelas;
 
-	@Column()
-	private Long id_funcionario;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf")
+	private Funcionario funcionario;
 
-	@Column()
-	private Long id_cliente;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf")
+	private Cliente cliente;
 
 	@Column
 	private String data_geracao;
@@ -49,20 +55,20 @@ public class Titulo {
 		this.id_titulo = id_titulo;
 	}
 
-	public Long getId_funcionario() {
-		return this.id_funcionario;
+	public String getcpf_cliente() {
+		return this.cliente.getCpf();
 	}
 
-	public void setId_funcionario(Long id_funcionario) {
-		this.id_funcionario = id_funcionario;
+	public void setcpf_cliente(String cpf) {
+		this.cliente.setCpf(cpf);
 	}
 
-	public Long getId_cliente() {
-		return this.id_cliente;
+	public String getcpf_funcionario() {
+		return this.cliente.getCpf();
 	}
 
-	public void setId_cliente(Long id_cliente) {
-		this.id_cliente = id_cliente;
+	public void setcpf_funcionario(String cpf) {
+		this.cliente.setCpf(cpf);
 	}
 
 	public String getData_geracao() {
