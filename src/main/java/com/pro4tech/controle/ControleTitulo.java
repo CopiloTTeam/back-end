@@ -68,7 +68,7 @@ public class ControleTitulo {
                 LocalDateTime data_vencimento = LocalDateTime.from(data_hoje).plusDays(parcelas * 30);
                 Parcela parcela = new Parcela();
                 parcela.setId_titulo(novoTitulo.getId_titulo());
-                parcela.setId_cliente(novoTitulo.getId_cliente());
+                parcela.setcpf_cliente(novoTitulo.getcpf_cliente());
                 parcela.setData_vencimento(data_vencimento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null);
@@ -94,11 +94,11 @@ public class ControleTitulo {
             if (tituloOpt.isPresent()) {
                 Titulo tituloAtualizado = tituloOpt.get();
 
-                if (titulo.getId_funcionario() != null) {
-                    tituloAtualizado.setId_funcionario(titulo.getId_funcionario());
+                if (titulo.getcpf_funcionario() != null) {
+                    tituloAtualizado.setcpf_funcionario(titulo.getcpf_funcionario());
                 }
-                if (titulo.getId_cliente() != null) {
-                    tituloAtualizado.setId_cliente(titulo.getId_cliente());
+                if (titulo.getcpf_cliente() != null) {
+                    tituloAtualizado.setcpf_cliente(titulo.getcpf_cliente());
                 }
                 if (titulo.getData_geracao() != null) {
                     tituloAtualizado.setData_geracao(titulo.getData_geracao());

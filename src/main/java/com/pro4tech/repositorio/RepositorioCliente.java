@@ -13,4 +13,6 @@ import com.pro4tech.modelo.Cliente;
 public interface RepositorioCliente extends JpaRepository<Cliente, Long>{
     Optional<Cliente> findByCpf(String cpf);
 
+    Optional<Cliente> deletebyCpf(String cpf);
+
 }

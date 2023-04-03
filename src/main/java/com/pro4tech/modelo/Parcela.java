@@ -22,8 +22,9 @@ public class Parcela {
 	@JoinColumn(name = "id_titulo", referencedColumnName = "id_titulo")
     private Titulo titulo;
 
-    @Column
-    private Long id_cliente;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf")
+    private Cliente cliente;
     
     @Column
     private String data_vencimento;
@@ -60,12 +61,12 @@ public class Parcela {
         this.titulo.setId_titulo(id_titulo);
     }
 
-    public Long getId_cliente() {
-        return this.id_cliente;
+    public String getcpf_cliente() {
+        return this.cliente.getCpf();
     }
 
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setcpf_cliente(String cpf) {
+        this.cliente.setCpf(cpf);
     }
 
     public String getData_vencimento() {

@@ -25,26 +25,12 @@ public class ControleCliente {
         try {
             List<Cliente> clientes = repositorio.findAll();
             if (clientes.isEmpty()) {
-                return new ResponseEntity<>("Não há clientes cadastrados", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Não há clientes cadastrados", HttpStatus.NOT_FOUND);
             } else {
                 return new ResponseEntity<>(clientes, HttpStatus.OK);
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao listar clientes", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/listar/cliente/{id}")
-    public ResponseEntity<?> listarClientePorId(@PathVariable("id") Long id) {
-        try {
-            Optional<Cliente> cliente = repositorio.findById(id);
-            if (cliente.isPresent()) {
-                return new ResponseEntity<>(cliente.get().getId_cliente(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Erro ao listar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -55,7 +41,7 @@ public class ControleCliente {
             if (cliente.isPresent()) {
                 return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Cliente não encontrado", HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao listar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,11 +62,11 @@ public class ControleCliente {
         }
     }
 
-    @PutMapping("/atualizar/cliente/{id_cliente}")
-    public ResponseEntity<?> atualizarCliente(@PathVariable("id_cliente") long id_cliente,
+    @PutMapping("/atualizar/cliente/{cpf}")
+    public ResponseEntity<?> atualizarCliente(@PathVariable("cpf") String cpf,
             @RequestBody Cliente cliente) {
         try {
-            Cliente clienteAtualizado = repositorio.findById(id_cliente)
+            Cliente clienteAtualizado = repositorio.findByCpf(cpf)
                     .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
             if (cliente.getNome() != null) {
                 clienteAtualizado.setNome(cliente.getNome());
@@ -121,10 +107,10 @@ public class ControleCliente {
         }
     }
 
-    @DeleteMapping("/deletar/cliente/{id_cliente}")
-    public ResponseEntity<?> deletarCliente(@PathVariable("id_cliente") long id_cliente) {
+    @DeleteMapping("/deletar/cliente/{cpf}")
+    public ResponseEntity<?> deletarCliente(@PathVariable("cpf") String cpf) {
         try {
-            repositorio.deleteById(id_cliente);
+            repositorio.deletebyCpf(cpf);
             return new ResponseEntity<>("Cliente deletado", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao deletar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
