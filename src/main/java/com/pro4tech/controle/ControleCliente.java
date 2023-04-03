@@ -39,6 +39,20 @@ public class ControleCliente {
         try {
             Optional<Cliente> cliente = repositorio.findById(id);
             if (cliente.isPresent()) {
+                return new ResponseEntity<>(cliente.get().getId_cliente(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erro ao listar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/listar/clientecpf/{cpf}")
+    public ResponseEntity<?> listarClientePorCpf(@PathVariable("cpf") String cpf) {
+        try {
+            Optional<Cliente> cliente = repositorio.findByCpf(cpf);
+            if (cliente.isPresent()) {
                 return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);
@@ -111,7 +125,7 @@ public class ControleCliente {
     public ResponseEntity<?> deletarCliente(@PathVariable("id_cliente") long id_cliente) {
         try {
             repositorio.deleteById(id_cliente);
-            return new ResponseEntity<>("Cliente deletado",     HttpStatus.OK);
+            return new ResponseEntity<>("Cliente deletado", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao deletar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
         }

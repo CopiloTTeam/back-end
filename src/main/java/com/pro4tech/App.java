@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class App {
 
 	public static void main(String[] args) {
@@ -48,7 +48,8 @@ public class App {
 		// configuracao.put("spring.datasource.password", "fatec"); 
 		// senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "root"); // senha
+		configuracao.put("spring.datasource.password", "fatec"); // senha
+		configuracao.put("spring.datasource.setMaxLifetime", "60"); // senha
 		
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir diretamento com o banco

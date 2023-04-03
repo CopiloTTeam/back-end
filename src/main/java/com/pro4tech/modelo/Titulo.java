@@ -16,10 +16,10 @@ public class Titulo {
 	@Column
 	private Integer parcelas;
 
-	@Column(nullable = false)
+	@Column()
 	private Long id_funcionario;
 
-	@Column(nullable = false)
+	@Column()
 	private Long id_cliente;
 
 	@Column
