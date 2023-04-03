@@ -21,7 +21,6 @@ public class ControleFuncionario {
     public ControleFuncionario(PasswordEncoder encoder) {
         this.encoder = encoder;
     }
-
     @Autowired
     private RepositorioFuncionario repositorio;
 

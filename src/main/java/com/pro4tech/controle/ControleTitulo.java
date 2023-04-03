@@ -1,5 +1,8 @@
 package com.pro4tech.controle;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +24,7 @@ public class ControleTitulo {
     @Autowired
     private RepositorioParcela repositorioParcela;
 
+    
     @GetMapping("/listar/titulo")
     public ResponseEntity<?> cadastroTitulo() {
         try {
@@ -56,17 +60,20 @@ public class ControleTitulo {
     @PostMapping("/cadastrar/titulo")
     public ResponseEntity<?> cadastrarTitulo(@RequestBody Titulo titulo) {
         try {
+            Date date = new Date();
+            LocalDateTime data_hoje = LocalDateTime.from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
+            titulo.setData_geracao(data_hoje.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             Titulo novoTitulo = repositorio.save(titulo);
-            Integer parcelas = novoTitulo.getParcelas();
-            for (int i = 1; i <= parcelas; i++) {
+            for (int parcelas = 1; parcelas <= 12; parcelas++) {
+                LocalDateTime data_vencimento = LocalDateTime.from(data_hoje).plusDays(parcelas * 30);
                 Parcela parcela = new Parcela();
                 parcela.setId_titulo(novoTitulo.getId_titulo());
                 parcela.setId_cliente(novoTitulo.getId_cliente());
-                parcela.setData_vencimento(null);
+                parcela.setData_vencimento(data_vencimento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null);
                 parcela.setStatus(false);
-                parcela.setValor((double) (novoTitulo.getValor() / parcelas));
+                parcela.setValor((double) (novoTitulo.getValor() / 12));
                 parcela.setValor_pago(0.0);
                 System.out.println(parcela);
                 repositorioParcela.save(parcela);
@@ -87,9 +94,6 @@ public class ControleTitulo {
             if (tituloOpt.isPresent()) {
                 Titulo tituloAtualizado = tituloOpt.get();
 
-                if (titulo.getParcelas() != null) {
-                    tituloAtualizado.setParcelas(titulo.getParcelas());
-                }
                 if (titulo.getId_funcionario() != null) {
                     tituloAtualizado.setId_funcionario(titulo.getId_funcionario());
                 }
@@ -98,9 +102,6 @@ public class ControleTitulo {
                 }
                 if (titulo.getData_geracao() != null) {
                     tituloAtualizado.setData_geracao(titulo.getData_geracao());
-                }
-                if (titulo.getData_vencimento() != null) {
-                    tituloAtualizado.setData_vencimento(titulo.getData_vencimento());
                 }
                 if (titulo.getValor() != null) {
                     tituloAtualizado.setValor(titulo.getValor());
@@ -143,5 +144,10 @@ public class ControleTitulo {
                     .body("Erro ao deletar título: " + e.getMessage());
         }
     }
+
+
+
+
+    //DIRECT FUNCTIONS
 
 }

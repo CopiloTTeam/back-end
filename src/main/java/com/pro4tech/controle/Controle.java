@@ -37,8 +37,7 @@ public class Controle {
             
             // Optional<Funcio> = rep.findByEmail(email);
             Optional<Funcionario> funcionarioo = rep.findByEmail(email);
-            if (funcionarioo.isPresent()) {
-                
+            if (funcionarioo.isPresent()) {               
             Boolean valid = false;
                 Funcionario Corpofuncionario = funcionarioo.get();
 

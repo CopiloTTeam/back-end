@@ -26,9 +26,6 @@ public class Titulo {
 	private String data_geracao;
 
 	@Column
-	private String data_vencimento;
-
-	@Column
 	private Float valor;
 
 	@Column
@@ -50,14 +47,6 @@ public class Titulo {
 
 	public void setId_titulo(Long id_titulo) {
 		this.id_titulo = id_titulo;
-	}
-
-	public Integer getParcelas() {
-		return this.parcelas;
-	}
-
-	public void setParcelas(Integer parcelas) {
-		this.parcelas = parcelas;
 	}
 
 	public Long getId_funcionario() {
@@ -82,14 +71,6 @@ public class Titulo {
 
 	public void setData_geracao(String data_geracao) {
 		this.data_geracao = data_geracao;
-	}
-
-	public String getData_vencimento() {
-		return this.data_vencimento;
-	}
-
-	public void setData_vencimento(String data_vencimento) {
-		this.data_vencimento = data_vencimento;
 	}
 
 	public Float getValor() {
