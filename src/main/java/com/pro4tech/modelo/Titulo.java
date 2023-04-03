@@ -13,10 +13,13 @@ public class Titulo {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id_titulo;
 
-	@Column(nullable = false)
+	@Column
+	private Integer parcelas;
+
+	@Column()
 	private Long id_funcionario;
 
-	@Column(nullable = false)
+	@Column()
 	private Long id_cliente;
 
 	@Column

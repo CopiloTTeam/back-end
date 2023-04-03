@@ -39,6 +39,20 @@ public class ControleCliente {
         try {
             Optional<Cliente> cliente = repositorio.findById(id);
             if (cliente.isPresent()) {
+                return new ResponseEntity<>(cliente.get().getId_cliente(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erro ao listar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/listar/clientecpf/{cpf}")
+    public ResponseEntity<?> listarClientePorCpf(@PathVariable("cpf") String cpf) {
+        try {
+            Optional<Cliente> cliente = repositorio.findByCpf(cpf);
+            if (cliente.isPresent()) {
                 return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);

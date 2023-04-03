@@ -21,9 +21,6 @@ public class ControleFuncionario {
     public ControleFuncionario(PasswordEncoder encoder) {
         this.encoder = encoder;
     }
-
-
-
     @Autowired
     private RepositorioFuncionario repositorio;
 
@@ -98,7 +95,7 @@ public class ControleFuncionario {
                     funcionarioAtualizado.setEmail(funcionario.getEmail());
                 }
                 if (funcionario.getSenha() != null) {
-                    funcionarioAtualizado.setSenha(funcionario.getSenha());
+                    funcionarioAtualizado.setSenha(encoder.encode(funcionario.getSenha()));
                 }
                 Funcionario funcionarioSalvo = repositorio.save(funcionarioAtualizado);
                 return new ResponseEntity<>(funcionarioSalvo, HttpStatus.OK);
