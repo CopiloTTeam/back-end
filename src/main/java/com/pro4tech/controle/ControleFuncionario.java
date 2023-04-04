@@ -109,10 +109,49 @@ public class ControleFuncionario {
         }
     }
 
-    @DeleteMapping("/deletar/funcionario/{id}")
-    public ResponseEntity<String> deletarFuncionario(@PathVariable("id") long id) {
+    @PutMapping("/atualizar/funcionarioc/{cpf}")
+    public ResponseEntity<?> atualizarFuncionarioc(@PathVariable("cpf") String cpf, @RequestBody Funcionario funcionario) {
         try {
-            var consulta = repositorio.findById(id);
+            var consulta = repositorio.findByCpf(cpf);
+            if (consulta.isPresent()) {
+                Funcionario funcionarioAtualizado = consulta.get();
+                if (funcionario.getCpf() != null) {
+                    Optional<Funcionario> funcionarioComMesmoCpf = repositorio.findByCpf(funcionario.getCpf());
+                    if (funcionarioComMesmoCpf.isPresent()) {
+                        return ResponseEntity.status(HttpStatus.CONFLICT)
+                                .body("Não é possível atualizar o funcionário devido a uma entrada duplicada.");
+                    } else {
+                        funcionarioAtualizado.setCpf(funcionario.getCpf());
+                    }
+                }
+                if (funcionario.getNome() != null) {
+                    funcionarioAtualizado.setNome(funcionario.getNome());
+                }
+                if (funcionario.getCargo() != null) {
+                    funcionarioAtualizado.setCargo(funcionario.getCargo());
+                }
+                if (funcionario.getEmail() != null) {
+                    funcionarioAtualizado.setEmail(funcionario.getEmail());
+                }
+                if (funcionario.getSenha() != null) {
+                    funcionarioAtualizado.setSenha(encoder.encode(funcionario.getSenha()));
+                }
+                Funcionario funcionarioSalvo = repositorio.save(funcionarioAtualizado);
+                return new ResponseEntity<>(funcionarioSalvo, HttpStatus.OK);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Funcionário não encontrado com o ID informado");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocorreu um erro ao atualizar o funcionário: " + e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/deletar/funcionario/{cpf}")
+    public ResponseEntity<String> deletarFuncionario(@PathVariable("cpf") String cpf) {
+        try {
+            var consulta = repositorio.findByCpf(cpf);
             if (consulta.isPresent()) {
                 repositorio.delete(consulta.get());
                 return ResponseEntity.ok("Funcionário deletado com sucesso.");
