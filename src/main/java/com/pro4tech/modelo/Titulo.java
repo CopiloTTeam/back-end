@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 @Entity
 public class Titulo {
 
+	public final String cpf = null;
+
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id_titulo;
@@ -31,11 +33,11 @@ public class Titulo {
 	@Column
 	private String codigo_barra;
 
-	@Column
-	private String qr_code;
+	// @Column
+	// private String qr_code;
 
-	@Column
-	private String numero_boleto;
+	// @Column
+	// private String numero_boleto;
 
 	@Column
 	private String nome_produto;
@@ -89,21 +91,29 @@ public class Titulo {
 		this.codigo_barra = codigo_barra;
 	}
 
-	public String getQr_code() {
-		return this.qr_code;
+	public void setParcelas(Integer parcelas) {
+		this.parcelas = parcelas;
 	}
 
-	public void setQr_code(String qr_code) {
-		this.qr_code = qr_code;
+	public Integer getParcelas() {
+		return this.parcelas;
 	}
 
-	public String getNumero_boleto() {
-		return this.numero_boleto;
-	}
+	// public String getQr_code() {
+	// 	return this.qr_code;
+	// }
 
-	public void setNumero_boleto(String numero_boleto) {
-		this.numero_boleto = numero_boleto;
-	}
+	// public void setQr_code(String qr_code) {
+	// 	this.qr_code = qr_code;
+	// }
+
+	// public String getNumero_boleto() {
+	// 	return this.numero_boleto;
+	// }
+
+	// public void setNumero_boleto(String numero_boleto) {
+	// 	this.numero_boleto = numero_boleto;
+	// }
 
 	public String getNome_produto() {
 		return this.nome_produto;
@@ -111,6 +121,10 @@ public class Titulo {
 
 	public void setNome_produto(String nome_produto) {
 		this.nome_produto = nome_produto;
+	}
+
+	public String getCpf() {
+		return this.cpf;
 	}
 
 

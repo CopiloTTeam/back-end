@@ -39,7 +39,7 @@ public class ControleCliente {
         try {
             Optional<Cliente> cliente = repositorio.findById(id);
             if (cliente.isPresent()) {
-                return new ResponseEntity<>(cliente.get().getId_cliente(), HttpStatus.OK);
+                return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Cliente não encontrado", HttpStatus.BAD_REQUEST);
             }

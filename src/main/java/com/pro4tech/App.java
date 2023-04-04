@@ -52,8 +52,8 @@ public class App {
 		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // rodar local
 		// 3.2 Usuário e senha
 		// configuracao.put("spring.datasource.username", "root");
-		// usuario
-		// configuracao.put("spring.datasource.password", "fatec");
+		// // usuario
+		// configuracao.put("spring.datasource.password", "admin");
 		// senha
 		// String username = dotenv.get("username");
 		// if (username != null) {
@@ -71,7 +71,7 @@ public class App {
 		// }
 		// senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "fatec"); // senha
+		configuracao.put("spring.datasource.password", "admin"); // senha
 		configuracao.put("spring.datasource.setMaxLifetime", "60"); // senha
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir

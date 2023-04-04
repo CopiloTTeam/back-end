@@ -11,8 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.pro4tech.modelo.Cliente;
 import com.pro4tech.modelo.Parcela;
 import com.pro4tech.modelo.Titulo;
+import com.pro4tech.repositorio.RepositorioCliente;
 import com.pro4tech.repositorio.RepositorioParcela;
 import com.pro4tech.repositorio.RepositorioTitulo;
 
@@ -23,6 +25,8 @@ public class ControleTitulo {
     private RepositorioTitulo repositorio;
     @Autowired
     private RepositorioParcela repositorioParcela;
+    @Autowired
+    private RepositorioCliente repositorioCliente;
 
     
     @GetMapping("/listar/titulo")
@@ -63,7 +67,15 @@ public class ControleTitulo {
             Date date = new Date();
             LocalDateTime data_hoje = LocalDateTime.from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
             titulo.setData_geracao(data_hoje.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            Optional<Cliente> cliente = repositorioCliente.findByCpf(titulo.getCpf());
+            if (cliente.isPresent()) {
+                titulo.setId_cliente(cliente.get().getId_cliente());
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Cliente não encontrado");
+            }
             Titulo novoTitulo = repositorio.save(titulo);
+            novoTitulo.setId_cliente(cliente.get().getId_cliente());
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
                 LocalDateTime data_vencimento = LocalDateTime.from(data_hoje).plusDays(parcelas * 30);
                 Parcela parcela = new Parcela();
@@ -78,7 +90,8 @@ public class ControleTitulo {
                 System.out.println(parcela);
                 repositorioParcela.save(parcela);
             }
-            return ResponseEntity.ok(novoTitulo);
+            // return ResponseEntity.ok(novoTitulo);
+            return ResponseEntity.ok(repositorio.save(novoTitulo));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -109,12 +122,12 @@ public class ControleTitulo {
                 if (titulo.getCodigo_barra() != null) {
                     tituloAtualizado.setCodigo_barra(titulo.getCodigo_barra());
                 }
-                if (titulo.getQr_code() != null) {
-                    tituloAtualizado.setQr_code(titulo.getQr_code());
-                }
-                if (titulo.getNumero_boleto() != null) {
-                    tituloAtualizado.setNumero_boleto(titulo.getNumero_boleto());
-                }
+                // if (titulo.getQr_code() != null) {
+                //     tituloAtualizado.setQr_code(titulo.getQr_code());
+                // }
+                // if (titulo.getNumero_boleto() != null) {
+                //     tituloAtualizado.setNumero_boleto(titulo.getNumero_boleto());
+                // }
                 if (titulo.getNome_produto() != null) {
                     tituloAtualizado.setNome_produto(titulo.getNome_produto());
                 }
