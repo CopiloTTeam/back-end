@@ -50,7 +50,7 @@ public class Titulo {
 	@Column
 	private String nome_produto;
 
-	@OneToMany(mappedBy = "titulo", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "titulo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Parcela> parcela;
 
 	public Long getId_titulo() {

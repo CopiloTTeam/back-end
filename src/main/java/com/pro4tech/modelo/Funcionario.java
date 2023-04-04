@@ -2,6 +2,7 @@ package com.pro4tech.modelo;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,7 +33,7 @@ public class Funcionario {
     @Column(unique= true, nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "funcionario", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "funcionario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Titulo> titulos;
 
     public String getNome() {
