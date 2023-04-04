@@ -1,21 +1,26 @@
 package com.pro4tech.modelo;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
+@Table(name = "Funcionarios")
 public class Funcionario {
+
+    @Id
+    @Column(unique = true, nullable = false)
+    private String cpf;
 
     @Column
     private String nome;
-
-    @Column(unique = true, nullable = false)
-    private String cpf;
 
     @Column
     private String cargo;
@@ -25,6 +30,9 @@ public class Funcionario {
 
     @Column(unique= true, nullable = false)
     private String senha;
+
+    @OneToMany(mappedBy = "funcionario")
+    private List<Titulo> titulos;
 
     public String getNome() {
         return this.nome;

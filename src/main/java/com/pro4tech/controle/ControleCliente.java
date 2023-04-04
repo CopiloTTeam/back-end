@@ -80,8 +80,8 @@ public class ControleCliente {
             if (cliente.getCep() != null) {
                 clienteAtualizado.setCep(cliente.getCep());
             }
-            if (cliente.getLogradouro() != null) {
-                clienteAtualizado.setLogradouro(cliente.getLogradouro());
+            if (cliente.getLodradouro() != null) {
+                clienteAtualizado.setLodradouro(cliente.getLodradouro());
             }
             if (cliente.getBairro() != null) {
                 clienteAtualizado.setBairro(cliente.getBairro());
@@ -110,7 +110,7 @@ public class ControleCliente {
     @DeleteMapping("/deletar/cliente/{cpf}")
     public ResponseEntity<?> deletarCliente(@PathVariable("cpf") String cpf) {
         try {
-            repositorio.deletebyCpf(cpf);
+            repositorio.deleteByCpf(cpf);
             return new ResponseEntity<>("Cliente deletado", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro ao deletar cliente", HttpStatus.INTERNAL_SERVER_ERROR);

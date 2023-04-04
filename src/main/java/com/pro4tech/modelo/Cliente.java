@@ -1,21 +1,26 @@
 package com.pro4tech.modelo;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
+@Table(name = "Clientes")
 public class Cliente {
 
-    @Column
-    private String nome;
-
+    @Id
     @Column(unique = true, nullable = false)
     private String cpf;
+    
+    @Column
+    private String nome;
 
     @Column
     private String cep;
@@ -34,6 +39,13 @@ public class Cliente {
 
     @Column(nullable = false)
     private String email;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Parcela> parcelas;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Titulo> titulo;
+    
 
     public String getNome() {
         return this.nome;

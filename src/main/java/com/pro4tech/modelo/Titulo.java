@@ -1,5 +1,7 @@
 package com.pro4tech.modelo;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -20,12 +23,12 @@ public class Titulo {
 	@Column
 	private Integer parcelas;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cpf_funcionario", nullable = false, referencedColumnName = "cpf")
 	private Funcionario funcionario;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cpf_cliente", nullable = false, referencedColumnName = "cpf")
 	private Cliente cliente;
 
 	@Column
@@ -46,6 +49,8 @@ public class Titulo {
 	@Column
 	private String nome_produto;
 
+	@OneToMany(mappedBy = "titulo")
+	private List<Parcela> parcela;
 
 	public Long getId_titulo() {
 		return this.id_titulo;

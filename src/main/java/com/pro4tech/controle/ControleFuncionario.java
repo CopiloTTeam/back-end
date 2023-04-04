@@ -53,10 +53,10 @@ public class ControleFuncionario {
         }
     }
 
-    @GetMapping("/listar/funcionario/{id}")
-    public ResponseEntity<?> listarFuncionarioPorId(@PathVariable Long id) {
+    @GetMapping("/listar/funcionario/{cpf}")
+    public ResponseEntity<?> listarFuncionarioPorId(@PathVariable String cpf) {
         try {
-            var consulta = repositorio.findById(id);
+            var consulta = repositorio.findByCpf(cpf);
             if (consulta.isPresent()) {
                 return new ResponseEntity<>(consulta.get(), HttpStatus.OK);
             } else {
@@ -69,15 +69,14 @@ public class ControleFuncionario {
         }
     }
 
-    @PutMapping("/atualizar/funcionario/{id}")
-    public ResponseEntity<?> atualizarFuncionario(@PathVariable("id") long id, @RequestBody Funcionario funcionario) {
+    @PutMapping("/atualizar/funcionario/{cpf}")
+    public ResponseEntity<?> atualizarFuncionario(@PathVariable("cpf") String cpf, @RequestBody Funcionario funcionario) {
         try {
-            var consulta = repositorio.findById(id);
+            var consulta = repositorio.findByCpf(cpf);
             if (consulta.isPresent()) {
                 Funcionario funcionarioAtualizado = consulta.get();
                 if (funcionario.getCpf() != null) {
-                    Optional<Funcionario> funcionarioComMesmoCpf = repositorio.findByCpfAndIdNot(funcionario.getCpf(),
-                            id);
+                    Optional<Funcionario> funcionarioComMesmoCpf = repositorio.findByCpf(funcionario.getCpf());
                     if (funcionarioComMesmoCpf.isPresent()) {
                         return ResponseEntity.status(HttpStatus.CONFLICT)
                                 .body("Não é possível atualizar o funcionário devido a uma entrada duplicada.");
@@ -109,10 +108,10 @@ public class ControleFuncionario {
         }
     }
 
-    @DeleteMapping("/deletar/funcionario/{id}")
-    public ResponseEntity<String> deletarFuncionario(@PathVariable("id") long id) {
+    @DeleteMapping("/deletar/funcionario/{cpf}")
+    public ResponseEntity<String> deletarFuncionario(@PathVariable("cpf") String cpf) {
         try {
-            var consulta = repositorio.findById(id);
+            var consulta = repositorio.findByCpf(cpf);
             if (consulta.isPresent()) {
                 repositorio.delete(consulta.get());
                 return ResponseEntity.ok("Funcionário deletado com sucesso.");
