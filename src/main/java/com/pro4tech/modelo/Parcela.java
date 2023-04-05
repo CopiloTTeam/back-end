@@ -19,7 +19,7 @@ public class Parcela {
     private Long id_titulo;
 
     @Column
-    private Long id_cliente;
+    private String cpf;
     
     @Column
     private String data_vencimento;
@@ -56,12 +56,12 @@ public class Parcela {
         this.id_titulo = id_titulo;
     }
 
-    public Long getId_cliente() {
-        return this.id_cliente;
+    public String getCpf() {
+        return this.cpf;
     }
 
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getData_vencimento() {

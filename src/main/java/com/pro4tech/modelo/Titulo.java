@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 @Entity
 public class Titulo {
 
-	public final String cpf = null;
+	// public final String cpf = null;
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Titulo {
 	private Long id_funcionario;
 
 	@Column()
-	private Long id_cliente;
+	private String cpf;
 
 	@Column
 	private String data_geracao;
@@ -59,13 +59,13 @@ public class Titulo {
 		this.id_funcionario = id_funcionario;
 	}
 
-	public Long getId_cliente() {
-		return this.id_cliente;
-	}
+	// public Long getId() {
+	// 	return this.id;
+	// }
 
-	public void setId_cliente(Long id_cliente) {
-		this.id_cliente = id_cliente;
-	}
+	// public void setId(Long id) {
+	// 	this.id = id;
+	// }
 
 	public String getData_geracao() {
 		return this.data_geracao;
@@ -125,6 +125,9 @@ public class Titulo {
 
 	public String getCpf() {
 		return this.cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 

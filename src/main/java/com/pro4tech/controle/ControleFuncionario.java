@@ -69,6 +69,22 @@ public class ControleFuncionario {
         }
     }
 
+    @GetMapping("/listar/funcionarioc/{cpf}")
+    public ResponseEntity<?> listarFuncionarioCpf(@PathVariable String cpf) {
+        try {
+            var consulta = repositorio.findByCpf(cpf);
+            if (consulta.isPresent()) {
+                return new ResponseEntity<>(consulta.get(), HttpStatus.OK);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Funcionário não encontrado com o CPF informado");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocorreu um erro ao listar o funcionário: " + e.getMessage());
+        }
+    }
+
     @PutMapping("/atualizar/funcionario/{id}")
     public ResponseEntity<?> atualizarFuncionario(@PathVariable("id") long id, @RequestBody Funcionario funcionario) {
         try {

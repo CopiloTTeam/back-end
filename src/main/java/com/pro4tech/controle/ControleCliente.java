@@ -35,9 +35,10 @@ public class ControleCliente {
     }
 
     @GetMapping("/listar/cliente/{id}")
-    public ResponseEntity<?> listarClientePorId(@PathVariable("id") Long id) {
+    public ResponseEntity<?> listarClientePorId(@PathVariable("id") String id) {
         try {
-            Optional<Cliente> cliente = repositorio.findById(id);
+            // Optional<Cliente> cliente = repositorio.findById(id);
+            Optional<Cliente> cliente = repositorio.findByCpf(id);
             if (cliente.isPresent()) {
                 return new ResponseEntity<>(cliente.get(), HttpStatus.OK);
             } else {

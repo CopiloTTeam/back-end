@@ -43,9 +43,9 @@ public class Controle {
 
                 valid = encoder.matches(senha, Corpofuncionario.getSenha());
                 if (valid) {
-                return new ResponseEntity<>(valid , HttpStatus.OK);
+                return new ResponseEntity<>(Corpofuncionario.getCpf() , HttpStatus.OK);
                 } else {
-                return new ResponseEntity<>(valid , HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+                return new ResponseEntity<>("Funcionario Com login ou senha errados" , HttpStatus.NON_AUTHORITATIVE_INFORMATION);
                 }
     }
   return new ResponseEntity<>("Funcionario Não Encontrado", HttpStatus.NON_AUTHORITATIVE_INFORMATION);

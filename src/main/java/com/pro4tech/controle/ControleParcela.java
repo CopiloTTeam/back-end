@@ -49,28 +49,28 @@ public class ControleParcela {
         }
     }
     // crie um método para listar parcelas por id de titulo
-    @GetMapping("/listar/parcela/titulo/{id}")
-    public ResponseEntity<?> listarParcelaPorIdTitulo(@PathVariable("id") Long id) {
-        try {
-            var parcela = repositorio.findById(id);
-            if (parcela.isPresent()) {
-                return new ResponseEntity<>(parcela.get(), HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Parcela não encontrada", HttpStatus.BAD_REQUEST);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>("Erro ao listar parcela", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    // @GetMapping("/listar/parcela/titulo/{id}")
+    // public ResponseEntity<?> listarParcelaPorIdTitulo(@PathVariable("id") Long id) {
+    //     try {
+    //         var parcela = repositorio.findById(id);
+    //         if (parcela.isPresent()) {
+    //             return new ResponseEntity<>(parcela.get(), HttpStatus.OK);
+    //         } else {
+    //             return new ResponseEntity<>("Parcela não encontrada", HttpStatus.BAD_REQUEST);
+    //         }
+    //     } catch (Exception e) {
+    //         return new ResponseEntity<>("Erro ao listar parcela", HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
 
     @PutMapping("/atualizar/parcela/{id_parcela}")
     public ResponseEntity<?> atualizarParcela(@PathVariable("id_parcela") long id_parcela,
             @RequestBody Parcela parcela) {
         try {
-            System.out.println(id_parcela);
             var parcelaAtualizada = repositorio.findById(id_parcela);
+            // return 
             if (parcelaAtualizada.isPresent()) {
-                if (parcela.getStatus() == true) {
+                if (parcelaAtualizada.get().getStatus() == false) {
                     Date date = new Date();
                     LocalDateTime data_hoje = LocalDateTime
                             .from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
@@ -105,8 +105,6 @@ public class ControleParcela {
             } else {
                 List<Parcela> parcelas = new ArrayList<>();
                 for (int i = 0; i < todas_parcelas.size(); i++) {
-                    System.out.println(i);
-                    System.out.println(todas_parcelas.size());
                     if (todas_parcelas.get(i).getId_titulo() == id_titulo){
                         parcelas.add(todas_parcelas.get(i));
                     }
@@ -120,4 +118,5 @@ public class ControleParcela {
         return new ResponseEntity<>("Erro ao listar parcelas", HttpStatus.INTERNAL_SERVER_ERROR);
     }
     }
+
 }

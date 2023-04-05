@@ -12,5 +12,6 @@ import com.pro4tech.modelo.Cliente;
 @Repository
 public interface RepositorioCliente extends JpaRepository<Cliente, Long>{
     Optional<Cliente> findByCpf(String cpf);
+    // Optional<Cliente> findByCpff(Long cpf);
 
 }
