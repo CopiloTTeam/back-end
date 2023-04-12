@@ -19,38 +19,36 @@ import java.util.Optional;
 @RestController
 public class Controle {
 
+  private final PasswordEncoder encoder;
 
-    private final PasswordEncoder encoder;
+  public Controle(PasswordEncoder encoder) {
+    this.encoder = encoder;
+  }
 
-    public Controle(PasswordEncoder encoder) {
-        this.encoder = encoder;
+  @Autowired
+  private RepositorioFuncionario rep;
+
+  @PostMapping("/login")
+  public ResponseEntity<?> logar(@RequestBody Map<String, Object> json) {
+
+    String email = (String) json.get("email");
+    String senha = (String) json.get("senha");
+
+    // Optional<Funcio> = rep.findByEmail(email);
+    Optional<Funcionario> funcionarioo = rep.findByEmail(email);
+    if (funcionarioo.isPresent()) {
+      Boolean valid = false;
+      Funcionario Corpofuncionario = funcionarioo.get();
+
+      valid = encoder.matches(senha, Corpofuncionario.getSenha());
+      if (valid) {
+        return new ResponseEntity<>(Corpofuncionario.getCpf(), HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>("Funcionario Com login ou senha errados", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+      }
     }
-    @Autowired
-    private RepositorioFuncionario rep;
-  
+    return new ResponseEntity<>("Funcionario Não Encontrado", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 
-    @PostMapping("/login")
-    public ResponseEntity<?> logar(@RequestBody Map<String, Object> json) {
-                
-            String email = (String) json.get("email");
-            String senha = (String) json.get("senha");
-            
-            // Optional<Funcio> = rep.findByEmail(email);
-            Optional<Funcionario> funcionarioo = rep.findByEmail(email);
-            if (funcionarioo.isPresent()) {               
-            Boolean valid = false;
-                Funcionario Corpofuncionario = funcionarioo.get();
-
-                valid = encoder.matches(senha, Corpofuncionario.getSenha());
-                if (valid) {
-                return new ResponseEntity<>(Corpofuncionario.getCpf() , HttpStatus.OK);
-                } else {
-                return new ResponseEntity<>("Funcionario Com login ou senha errados" , HttpStatus.NON_AUTHORITATIVE_INFORMATION);
-                }
-    }
-  return new ResponseEntity<>("Funcionario Não Encontrado", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+  }
 
 }
-
-}
-
