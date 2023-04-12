@@ -33,6 +33,9 @@ public class ControleFuncionario {
                         HttpStatus.BAD_REQUEST);
             }
             funcionario.setSenha(encoder.encode(funcionario.getSenha()));
+            // Como descripstar a senha do funcionário?
+
+
             var funcionarioSalvo = repositorio.save(funcionario);
             return new ResponseEntity<>(funcionarioSalvo, HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
@@ -113,6 +116,7 @@ public class ControleFuncionario {
                 if (funcionario.getSenha() != null) {
                     funcionarioAtualizado.setSenha(encoder.encode(funcionario.getSenha()));
                 }
+                
                 Funcionario funcionarioSalvo = repositorio.save(funcionarioAtualizado);
                 return new ResponseEntity<>(funcionarioSalvo, HttpStatus.OK);
             } else {
