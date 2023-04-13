@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import com.pro4tech.modelo.Funcionario;
 import com.pro4tech.repositorio.RepositorioFuncionario;
 
+import Servico.ValidarCPF;
+
 @RestController
 public class ControleFuncionario {
-
+    
     private final PasswordEncoder encoder;
 
     public ControleFuncionario(PasswordEncoder encoder) {
@@ -29,13 +31,18 @@ public class ControleFuncionario {
         try {
             // Verifica se já existe algum funcionário com o mesmo CPF cadastrado
             if (repositorio.findByCpf(funcionario.getCpf()).isPresent()) {
+
                 return new ResponseEntity<>("Já existe um funcionário com o mesmo CPF cadastrado",
                         HttpStatus.BAD_REQUEST);
             }
             funcionario.setSenha(encoder.encode(funcionario.getSenha()));
-            // Como descripstar a senha do funcionário?
 
+            ValidarCPF validarCpf = new ValidarCPF(); 
+            boolean cpfValido = validarCpf.validarCpf(funcionario.getCpf());
 
+            if (!cpfValido) {
+                return new ResponseEntity<>("CPF inválido", HttpStatus.BAD_REQUEST);
+            }
             var funcionarioSalvo = repositorio.save(funcionario);
             return new ResponseEntity<>(funcionarioSalvo, HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
@@ -184,5 +191,5 @@ public class ControleFuncionario {
                     .body("Ocorreu um erro ao deletar o funcionário: " + e.getMessage());
         }
     }
-
 }
+
