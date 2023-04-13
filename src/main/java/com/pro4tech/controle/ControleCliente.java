@@ -122,13 +122,20 @@ public class ControleCliente {
         }
     }
 
-    @DeleteMapping("/deletar/cliente/{id_cliente}")
-    public ResponseEntity<?> deletarCliente(@PathVariable("id_cliente") long id_cliente) {
+    @DeleteMapping("/deletar/cliente/{cpf}")
+    public ResponseEntity<String> deletarCliente(@PathVariable("cpf") String cpf) {
         try {
-            repositorio.deleteById(id_cliente);
-            return new ResponseEntity<>("Cliente deletado", HttpStatus.OK);
+            var consulta = repositorio.findByCpf(cpf);
+            if (consulta.isPresent()) {
+                repositorio.delete(consulta.get());
+                return ResponseEntity.ok("Cliente deletado com sucesso.");
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Cliente não encontrado com o ID informado");
+            }
         } catch (Exception e) {
-            return new ResponseEntity<>("Erro ao deletar cliente", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Ocorreu um erro ao deletar o cliente: " + e.getMessage());
         }
     }
 
