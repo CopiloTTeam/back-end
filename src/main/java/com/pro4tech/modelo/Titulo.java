@@ -28,7 +28,7 @@ public class Titulo {
 	private String data_geracao;
 
 	@Column
-	private Float valor;
+	private String valor;
 
 	@Column
 	private String codigo_barra;
@@ -67,11 +67,11 @@ public class Titulo {
 		this.data_geracao = data_geracao;
 	}
 
-	public Float getValor() {
+	public String getValor() {
 		return this.valor;
 	}
 
-	public void setValor(Float valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 
