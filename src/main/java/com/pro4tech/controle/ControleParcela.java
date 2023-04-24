@@ -82,7 +82,7 @@ public class ControleParcela {
                             .setData_credito(data_hoje.plusDays(2).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 } else {
                     parcelaAtualizada.get().setStatus(false);
-                    parcelaAtualizada.get().setValor_pago((double) 0);
+                    parcelaAtualizada.get().setValor_pago("0,00");
                     parcelaAtualizada.get().setData_pagamento(null);
                     parcelaAtualizada.get().setData_credito(null);
                 }

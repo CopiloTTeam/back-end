@@ -64,6 +64,7 @@ public class ControleTitulo {
     @PostMapping("/cadastrar/titulo")
     public ResponseEntity<?> cadastrarTitulo(@RequestBody Titulo titulo) {
         try {
+            
             Date date = new Date();
             LocalDateTime data_hoje = LocalDateTime.from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
             titulo.setData_geracao(data_hoje.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
@@ -74,7 +75,6 @@ public class ControleTitulo {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("Cliente não encontrado");
             }
-            // exiba titulo no console
             Titulo novoTitulo = repositorio.save(titulo);
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
                 LocalDateTime data_vencimento = LocalDateTime.from(data_hoje).plusDays(parcelas * 30);
@@ -85,8 +85,8 @@ public class ControleTitulo {
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null);
                 parcela.setStatus(false);
-                parcela.setValor((double) (novoTitulo.getValor() / 12));
-                parcela.setValor_pago(0.0);
+                parcela.setValor(String.format("%.2f", valor / 12));
+                parcela.setValor_pago("0,0");
                 repositorioParcela.save(parcela);
             }
             return ResponseEntity.ok(repositorio.save(novoTitulo));
