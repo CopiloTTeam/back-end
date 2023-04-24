@@ -34,10 +34,10 @@ public class Parcela {
     private Boolean status;
 
     @Column
-    private Double valor;
+    private String valor;
 
     @Column
-    private Double valor_pago;
+    private String valor_pago;
 
 
     public Long getId_parcela() {
@@ -100,19 +100,19 @@ public class Parcela {
         this.status = status;
     }
 
-    public Double getValor() {
+    public String getValor() {
         return this.valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
-    public Double getValor_pago() {
+    public String getValor_pago() {
         return this.valor_pago;
     }
 
-    public void setValor_pago(Double valor_pago) {
+    public void setValor_pago(String valor_pago) {
         this.valor_pago = valor_pago;
     }
 

@@ -184,7 +184,7 @@ public class ControleFuncionario {
                 return ResponseEntity.ok("Funcionário deletado com sucesso.");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Funcionário não encontrado com o ID informado");
+                        .body("Funcionário não encontrado com o CPF informado");
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

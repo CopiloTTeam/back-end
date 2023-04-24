@@ -13,6 +13,7 @@ import com.pro4tech.modelo.Cliente;
 import com.pro4tech.repositorio.RepositorioCliente;
 
 import jakarta.persistence.EntityNotFoundException;
+import Servico.ValidarCPF;
 
 @RestController
 public class ControleCliente {
@@ -69,6 +70,12 @@ public class ControleCliente {
             // Verifica se já existe algum cliente com o mesmo CPF cadastrado
             if (repositorio.findByCpf(cliente.getCpf()).isPresent()) {
                 return new ResponseEntity<>("Já existe um cliente com o mesmo CPF cadastrado", HttpStatus.BAD_REQUEST);
+            }
+            ValidarCPF validarCpf = new ValidarCPF(); 
+            boolean cpfValido = validarCpf.validarCpf(cliente.getCpf());
+
+            if (!cpfValido) {
+                return new ResponseEntity<>("CPF inválido", HttpStatus.BAD_REQUEST);
             }
             var clienteCad = repositorio.save(cliente);
             return new ResponseEntity<>(clienteCad, HttpStatus.CREATED);
