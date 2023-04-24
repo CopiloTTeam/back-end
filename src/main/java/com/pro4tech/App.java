@@ -27,7 +27,7 @@ public class App {
 		// No objeto configuração são adicionados as configurações utilizadas na
 		// inicialização do sistema.
 		Map<String, Object> configuracao = new HashMap<>();
-		Dotenv dotenv = Dotenv.load();
+		// Dotenv dotenv = Dotenv.load();
 		// 2. Configuração para trocar de porta.
 		// Nesta configuração você pode escolher a porta que o servidor web será
 		// executado.
@@ -71,7 +71,7 @@ public class App {
 		// }
 		// senha
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "admin"); // senha
+		configuracao.put("spring.datasource.password", "root"); // senha
 		configuracao.put("spring.datasource.setMaxLifetime", "60"); // senha
 		// 4. Configurações adicionais para o mapeamento objeto relacional
 		// Estas configurações servem para auxiliar o desenvolvedor a interagir
