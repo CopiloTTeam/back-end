@@ -76,6 +76,7 @@ public class ControleTitulo {
                         .body("Cliente não encontrado");
             }
             Titulo novoTitulo = repositorio.save(titulo);
+            float valor = Float.parseFloat(novoTitulo.getValor().replace(".", "").replace(",", "."));
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
                 LocalDateTime data_vencimento = LocalDateTime.from(data_hoje).plusDays(parcelas * 30);
                 Parcela parcela = new Parcela();
