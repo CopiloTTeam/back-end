@@ -66,22 +66,21 @@ public class ControleTitulo {
         try {
             Date date = new Date();
             LocalDateTime data_hoje = LocalDateTime.from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
-            titulo.setData_geracao(data_hoje.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            Optional<Cliente> cliente = repositorioCliente.findByCpf(titulo.getCpf());
+            titulo.setData_geracao(data_hoje.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            Optional<Cliente> cliente = repositorioCliente.findByCpf(titulo.getCpf_cliente());
             if (cliente.isPresent()) {
-                titulo.setCpf(cliente.get().getCpf());
+                titulo.setCpf_cliente(cliente.get().getCpf());
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("Cliente não encontrado");
             }
-            // exiba titulo no console
             Titulo novoTitulo = repositorio.save(titulo);
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
                 LocalDateTime data_vencimento = LocalDateTime.from(data_hoje).plusDays(parcelas * 30);
                 Parcela parcela = new Parcela();
                 parcela.setId_titulo(novoTitulo.getId_titulo());
-                parcela.setCpf(novoTitulo.getCpf());
-                parcela.setData_vencimento(data_vencimento.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                parcela.setCpf(novoTitulo.getCpf_cliente());
+                parcela.setData_vencimento(data_vencimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null);
                 parcela.setStatus(false);
@@ -105,11 +104,11 @@ public class ControleTitulo {
             if (tituloOpt.isPresent()) {
                 Titulo tituloAtualizado = tituloOpt.get();
 
-                if (titulo.getId_funcionario() != null) {
-                    tituloAtualizado.setId_funcionario(titulo.getId_funcionario());
+                if (titulo.getCpf_funcionario() != null) {
+                    tituloAtualizado.setCpf_funcionario(titulo.getCpf_funcionario());
                 }
-                if (titulo.getCpf() != null) {
-                    tituloAtualizado.setCpf(titulo.getCpf());
+                if (titulo.getCpf_cliente() != null) {
+                    tituloAtualizado.setCpf_cliente(titulo.getCpf_cliente());
                 }
                 if (titulo.getData_geracao() != null) {
                     tituloAtualizado.setData_geracao(titulo.getData_geracao());
@@ -120,12 +119,6 @@ public class ControleTitulo {
                 if (titulo.getCodigo_barra() != null) {
                     tituloAtualizado.setCodigo_barra(titulo.getCodigo_barra());
                 }
-                // if (titulo.getQr_code() != null) {
-                //     tituloAtualizado.setQr_code(titulo.getQr_code());
-                // }
-                // if (titulo.getNumero_boleto() != null) {
-                //     tituloAtualizado.setNumero_boleto(titulo.getNumero_boleto());
-                // }
                 if (titulo.getNome_produto() != null) {
                     tituloAtualizado.setNome_produto(titulo.getNome_produto());
                 }

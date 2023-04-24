@@ -19,10 +19,10 @@ public class Titulo {
 	private Integer parcelas;
 
 	@Column()
-	private Long id_funcionario;
+	private Long cpf_funcionario;
 
 	@Column()
-	private String cpf;
+	private String cpf_cliente;
 
 	@Column
 	private String data_geracao;
@@ -51,21 +51,13 @@ public class Titulo {
 		this.id_titulo = id_titulo;
 	}
 
-	public Long getId_funcionario() {
-		return this.id_funcionario;
+	public Long getCpf_funcionario() {
+		return this.cpf_funcionario;
 	}
 
-	public void setId_funcionario(Long id_funcionario) {
-		this.id_funcionario = id_funcionario;
+	public void setCpf_funcionario(Long cpf_funcionario) {
+		this.cpf_funcionario = cpf_funcionario;
 	}
-
-	// public Long getId() {
-	// 	return this.id;
-	// }
-
-	// public void setId(Long id) {
-	// 	this.id = id;
-	// }
 
 	public String getData_geracao() {
 		return this.data_geracao;
@@ -99,22 +91,6 @@ public class Titulo {
 		return this.parcelas;
 	}
 
-	// public String getQr_code() {
-	// 	return this.qr_code;
-	// }
-
-	// public void setQr_code(String qr_code) {
-	// 	this.qr_code = qr_code;
-	// }
-
-	// public String getNumero_boleto() {
-	// 	return this.numero_boleto;
-	// }
-
-	// public void setNumero_boleto(String numero_boleto) {
-	// 	this.numero_boleto = numero_boleto;
-	// }
-
 	public String getNome_produto() {
 		return this.nome_produto;
 	}
@@ -123,11 +99,11 @@ public class Titulo {
 		this.nome_produto = nome_produto;
 	}
 
-	public String getCpf() {
-		return this.cpf;
+	public String getCpf_cliente() {
+		return this.cpf_cliente;
 	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpf_cliente(String cpf_cliente) {
+		this.cpf_cliente = cpf_cliente;
 	}
 
 
