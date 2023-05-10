@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -17,35 +18,29 @@ import com.fatec.pro4tech.repository.RepositorioFuncionario;
 public class UserAppUpdaterService {
 	@Autowired
 	private RepositorioFuncionario repository;
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	public ResponseEntity<Funcionario> update(Funcionario updateUser) {
 		try {
 			Optional<Funcionario> currentUser = repository.findByCpf(updateUser.getCpf());
-			// de um log no console para ver se o usuario esta sendo encontrado
-			// System.out.println("Found user1232131: " + currentUser.getNome);
-			 
 			Funcionario target = currentUser.orElse(null);
-			System.out.println(target.getNome()); 
-
-			// if (target.getNome() != updateUser.getNome()) {
-			target.setNome(updateUser.getNome());
-			// }
-			// if (target.getEmail() != updateUser.getEmail()) {
-			target.setEmail(updateUser.getEmail());
-			// }
-			// if (target.getCredential() != updateUser.getCredential()) {
-			// 	if (target.getCredential().getUserName() != updateUser.getCredential().getUserName()) {
-			// 		target.getCredential().setUserName(updateUser.getCredential().getUserName());
-			// 	}
-			// 	if (target.getCredential().getPassword() != updateUser.getCredential().getPassword()) {
-			// 		target.getCredential().setPassword(updateUser.getCredential().getPassword());
-			// 	}
-			// 	if (target.getCredential().getRole() != updateUser.getCredential().getRole()) {
-			// 		target.getCredential().setRole(updateUser.getCredential().getRole());
-			// 	}
-			// 	target.setRegistration(new Date(System.currentTimeMillis()));
-			// }
-			repository.save(updateUser);
+			if(!(updateUser.getNome() == null)){
+				if(!updateUser.getNome().isEmpty()){
+					target.setNome(updateUser.getNome());
+				}
+			}
+			if(updateUser.getEmail() != null ){
+				if (!updateUser.getEmail().isEmpty()) {
+					target.setEmail(updateUser.getEmail());
+				}
+			}
+			if (!(updateUser.getCredential() == null)) {
+				String password = updateUser.getCredential().getPassword();
+				updateUser.getCredential().setPassword(encoder.encode(password));
+				target.setCredential(updateUser.getCredential());
+			}
+			
+			repository.save(target);
 			return new ResponseEntity<>(target, HttpStatus.ACCEPTED);
 		} catch (InvalidDataAccessApiUsageException e) {
 			MultiValueMap<String, String> header = new LinkedMultiValueMap<>();

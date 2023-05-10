@@ -23,7 +23,6 @@ public class UpdateFuncionario {
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	@PutMapping("/atualizar/funcionario")
 	public ResponseEntity<Funcionario> update(@RequestBody Funcionario user) {
-		// System.out.println("Found user: " + user);
 		return updater.update(user);
 	}
 }

@@ -30,7 +30,7 @@
 // 				target.setEmail(updateUser.getEmail());
 // 			}
 // 			if (target.getCredential() != updateUser.getCredential()) {
-// 				if (target.getCredential().getUserName() != updateUser.getCredential().getUserName()) {
+// 				if (target.getCredential().() != updateUser.getCredential().getUserName()) {
 // 					target.getCredential().setUserName(updateUser.getCredential().getUserName());
 // 				}
 // 				if (target.getCredential().getPassword() != updateUser.getCredential().getPassword()) {
