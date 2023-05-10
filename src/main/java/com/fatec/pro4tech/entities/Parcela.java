@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
@@ -25,11 +27,9 @@ public class Parcela {
     private Long id_parcela;
 
     @ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_titulo", referencedColumnName = "id_titulo")
     private Titulo titulo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cpf_cliente", referencedColumnName = "cpf")
+    @OneToOne(cascade = CascadeType.ALL)
     private Cliente cliente;
     
     @Column

@@ -1,6 +1,7 @@
 package com.fatec.pro4tech.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -41,14 +43,8 @@ public class Titulo {
 	@Column 
 	private String nome_produto;
 	
-	@OneToOne(orphanRemoval = true, mappedBy = "titulo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Parcela parcela;
+	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Parcela> parcelas;
 
-    public Object getCredential() {
-        return null;
-    }
 
-    public String getId() {
-        return null;
-    }
 }
