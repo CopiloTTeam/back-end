@@ -16,6 +16,7 @@ import com.fatec.pro4tech.repository.RepositorioTitulo;
 public class TituloAppReaderService {
     @Autowired
 	private RepositorioTitulo repository;
+	
 
 	// public ResponseEntity<Titulo> getUser(String id) { 
 	// 	Optional<Titulo> currentUser = repository.findById(id);

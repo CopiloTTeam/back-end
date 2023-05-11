@@ -2,8 +2,10 @@ package com.fatec.pro4tech.services.responseentities.tituloapp;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -45,17 +47,15 @@ public class TituloAppWriterService {
 			Date date = new Date();
             LocalDateTime data_hoje = LocalDateTime.from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
 			data_hoje.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			System.out.println("data_hoje " + data_hoje);
-
 			titu.setData_geracao(data_hoje);
 			titu.setValor(titulo.valor()); 
 			titu.setNome_produto( titulo.nome_produto());
 			titu.setCliente( currentUser.get() );
 			titu.setFuncionario( currentFunc.get() ); 
-
-		
+			repository.save(titu);
+			Titulo target = repository.getById(titu.getId());
             float valor = Float.parseFloat(titu.getValor().replace(".", "").replace(",", "."));
-
+			List<Parcela> listaaa = new ArrayList<>();
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
                 LocalDateTime data_vencimento = LocalDateTime.from(titu.getData_geracao()).plusDays(1 * 30);
                 Parcela parcela = new Parcela();
@@ -72,9 +72,14 @@ public class TituloAppWriterService {
 				parcela.setNumero_boleto(titulo.numero_boleto());
 				parcela.setQr_code(titulo.qr_code());
 				repositoryParcela.save(parcela);
+
+				listaaa.add(parcela);
             }
-            return ResponseEntity.ok(repository.save(titu));
-			// return new ResponseEntity<>(HttpStatus.CREATED);
+
+			target.setParcelas(listaaa);
+			repository.save(target);
+
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (DataIntegrityViolationException e) {
 			MultiValueMap<String, String> header = new LinkedMultiValueMap<>();
 			header.add(e.getCause().getMessage(), e.getLocalizedMessage());

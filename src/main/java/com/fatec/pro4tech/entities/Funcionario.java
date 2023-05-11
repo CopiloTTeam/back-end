@@ -35,9 +35,6 @@ public class Funcionario {
     @Column(nullable = false)
 	private String email;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "funcionario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Titulo> titulos;
-
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private CredentialApp credential;
 

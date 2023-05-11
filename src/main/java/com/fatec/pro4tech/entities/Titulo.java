@@ -1,7 +1,11 @@
 package com.fatec.pro4tech.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,11 +26,12 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
+@JsonIgnoreProperties
 public class Titulo {
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long id_titulo;
+	private Long id;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private Funcionario funcionario;
@@ -42,9 +47,8 @@ public class Titulo {
 
 	@Column 
 	private String nome_produto;
-	
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "titulo", cascade = CascadeType.ALL)
+	@JsonManagedReference 
 	private List<Parcela> parcelas;
-
-
 }

@@ -1,14 +1,17 @@
 package com.fatec.pro4tech.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -20,14 +23,12 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
+@JsonIgnoreProperties
 public class Parcela {
     
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_parcela;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Titulo titulo;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Cliente cliente;
@@ -58,4 +59,9 @@ public class Parcela {
 
 	@Column
 	private String numero_boleto;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "tituloId")
+    @JsonBackReference
+    private Titulo titulo;
 }
