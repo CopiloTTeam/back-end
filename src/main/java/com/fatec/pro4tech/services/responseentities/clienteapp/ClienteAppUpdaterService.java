@@ -27,44 +27,75 @@ public class ClienteAppUpdaterService {
 			Optional<Cliente> currentUser = repository.findByCpf(updateUser.cpf());
             System.out.println("User");
 			Cliente target = currentUser.orElse(null);
+            Endereco endereco = new Endereco();
+            Contato contato = new Contato();
 
             if (target == null){
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
 
-          
-            target.setNome(updateUser.nome());
-        
-        
-            target.setCpf(updateUser.cpf());
-            
-			Contato contato = new Contato();
-           
-            contato.setTelefone(updateUser.telefone());
-        
-        
-            contato.setEmail(updateUser.email());
-            
+            if( updateUser.nome() != null){
+             target.setNome( updateUser.nome());
+            } else {
+                target.setNome(target.getNome());
+            }
+            if(updateUser.cpf() != null ){
+                target.setCpf(updateUser.cpf());
+            } else {
+                target.setCpf(target.getCpf()); 
+            }
+            // -----------Cliente----------------
+
+            if (updateUser.telefone() != null){
+                contato.setTelefone(updateUser.telefone());
+            } else {
+                contato.setTelefone(target.getContato().getTelefone());
+            }
+    
+            if (updateUser.email() != null) {
+                contato.setEmail(updateUser.email());
+            } else {
+                contato.setEmail(target.getContato().getEmail());
+            }
+             
             target.setContato(contato);
+            // -----------Contato----------------
+
+            if (updateUser.cep() != null){
+                endereco.setCep(updateUser.cep());
+            } else {
+                endereco.setCep(target.getEndereco().getCep());
+            }
             
-            Endereco endereco = new Endereco();
-          
-            endereco.setCep(updateUser.cep());
+            if (updateUser.cidade() != null){
+                endereco.setCidade(updateUser.cidade());
+            } else {
+                endereco.setCidade(target.getEndereco().getCidade());
+            }
+            
+            if (updateUser.bairro() != null){
+                endereco.setBairro(updateUser.bairro());
+            } else {
+                endereco.setBairro(target.getEndereco().getBairro());
+            }
         
-        
-            endereco.setCidade(updateUser.cidade());
-        
-        
-            endereco.setBairro(updateUser.bairro());
-        
-        
-            endereco.setEstado(updateUser.estado());
-        
-        
-            endereco.setLogradouro(updateUser.logradouro());
-        
-        
-            endereco.setComplemento(updateUser.complemento());
+            if (updateUser.estado() != null){
+                endereco.setEstado(updateUser.estado());
+            } else {
+                endereco.setEstado(target.getEndereco().getEstado());
+            }
+            
+            if (updateUser.logradouro() != null){
+                endereco.setLogradouro(updateUser.logradouro());
+            } else {
+                endereco.setLogradouro(target.getEndereco().getLogradouro());
+            }
+
+            if (updateUser.complemento() != null){
+                endereco.setComplemento(updateUser.complemento());
+            } else {
+                endereco.setComplemento(target.getEndereco().getComplemento());
+            }
             
             target.setEndereco(endereco);
             repository.save(target);
