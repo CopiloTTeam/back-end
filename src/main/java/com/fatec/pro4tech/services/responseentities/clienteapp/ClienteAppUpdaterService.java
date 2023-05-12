@@ -23,9 +23,8 @@ public class ClienteAppUpdaterService {
 
 	public ResponseEntity<Cliente> update(ClienteModel updateUser) {
 		try {
-            System.out.println("User" + updateUser);
+    
 			Optional<Cliente> currentUser = repository.findByCpf(updateUser.cpf());
-            System.out.println("User");
 			Cliente target = currentUser.orElse(null);
             Endereco endereco = new Endereco();
             Contato contato = new Contato();

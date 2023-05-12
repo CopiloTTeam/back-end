@@ -38,7 +38,7 @@ public class TituloAppWriterService {
 	private RepositorioParcela repositoryParcela ;
 
 	public ResponseEntity<?> save(TituloModel titulo) {
-		try {  
+		try { 
 			Titulo titu = new Titulo();
 			Optional<Cliente> currentUser = repositoryCliente.findByCpf(titulo.cliente_cpf());
 			Optional<Funcionario> currentFunc = repositoryFuncionario.findByCpf(titulo.funcionario_cpf());

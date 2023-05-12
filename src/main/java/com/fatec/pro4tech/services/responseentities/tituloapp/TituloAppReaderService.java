@@ -18,15 +18,15 @@ public class TituloAppReaderService {
 	private RepositorioTitulo repository;
 	
 
-	// public ResponseEntity<Titulo> getUser(String id) { 
-	// 	Optional<Titulo> currentUser = repository.findById(id);
-	// 	Titulo user = currentUser.orElse(null);
-	// 	if (user == null) {
-	// 		return new ResponseEntity<Titulo>(user, HttpStatus.NOT_FOUND);
-	// 	} else {
-	// 		return new ResponseEntity<Titulo>(user, HttpStatus.FOUND);
-	// 	}
-	// }
+	public ResponseEntity<Titulo> getUser(String id) { 
+		Optional<Titulo> currentUser = repository.findById(id);
+		Titulo user = currentUser.orElse(null);
+		if (user == null) {
+			return new ResponseEntity<Titulo>(user, HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Titulo>(user, HttpStatus.FOUND);
+		}
+	}
 
 	public ResponseEntity<List<Titulo>> getAllTitulos(){
 		List<Titulo> titulos = repository.findAll();

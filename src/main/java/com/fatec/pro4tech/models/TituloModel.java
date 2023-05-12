@@ -2,7 +2,8 @@ package com.fatec.pro4tech.models;
 
 import java.sql.Date;
 
-public record TituloModel( 
+public record TituloModel(
+    String id, 
     String cliente_cpf , 
     String funcionario_cpf,
     Date data_geracao,
