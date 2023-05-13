@@ -57,7 +57,7 @@ public class TituloAppWriterService {
             float valor = Float.parseFloat(titu.getValor().replace(".", "").replace(",", "."));
 			List<Parcela> listaaa = new ArrayList<>();
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
-                LocalDateTime data_vencimento = LocalDateTime.from(titu.getData_geracao()).plusDays(1 * 30);
+                LocalDateTime data_vencimento = LocalDateTime.from(titu.getData_geracao()).plusDays(parcelas * 30);
                 Parcela parcela = new Parcela();
                 parcela.setTitulo(titu);
 				parcela.setCliente( currentUser.get()); 
