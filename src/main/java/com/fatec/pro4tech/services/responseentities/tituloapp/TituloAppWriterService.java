@@ -66,7 +66,7 @@ public class TituloAppWriterService {
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null); 
                 parcela.setStatus(false);
-                parcela.setValor(String.format("%.2f", valor / 12));
+                parcela.setValor(String.format("%.2f", (valor / 12)/100));
                 parcela.setValor_pago(null);
 				parcela.setCodigo_barra(titulo.codigo_barra());
 				parcela.setNumero_boleto(titulo.numero_boleto());
