@@ -32,9 +32,9 @@ public class DatabaseInitializer {
             root.setRegistration(Calendar.getInstance().getTime());
             root.setEmail("gui@gui.com");
             CredentialApp credencial = new CredentialApp();
-            String password = encoder.encode("102030@@");
+            String password = encoder.encode("admin");
             credencial.setPassword(password);
-            credencial.setUserName("admin@copilotteam.com");
+            credencial.setUserName("admin@admin");
             credencial.setRole(roles.Administrador);
             root.setCredential(credencial);
 
