@@ -1,7 +1,5 @@
 package com.fatec.pro4tech.services.responseentities.tituloapp;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -45,9 +43,7 @@ public class TituloAppWriterService {
 			
 			
 			Date date = new Date();
-            LocalDateTime data_hoje = LocalDateTime.from(date.toInstant().atZone(java.time.ZoneId.systemDefault()));
-			data_hoje.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-			titu.setData_geracao(data_hoje);
+			titu.setData_geracao(date);
 			titu.setValor(titulo.valor()); 
 			titu.setNome_produto( titulo.nome_produto());
 			titu.setCliente( currentUser.get() );
@@ -57,12 +53,13 @@ public class TituloAppWriterService {
             float valor = Float.parseFloat(titu.getValor().replace(".", "").replace(",", "."));
 			List<Parcela> listaaa = new ArrayList<>();
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
-                LocalDateTime data_vencimento = LocalDateTime.from(titu.getData_geracao()).plusDays(parcelas * 30);
+				Date data_vencimento = new Date();
+				data_vencimento.setDate(data_vencimento.getDate() + (parcelas * 30));
                 Parcela parcela = new Parcela();
                 parcela.setTitulo(titu);
 				parcela.setCliente( currentUser.get()); 
 				parcela.setValor(titulo.valor());
-                parcela.setData_vencimento(data_vencimento.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                parcela.setData_vencimento(data_vencimento);
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null); 
                 parcela.setStatus(false);

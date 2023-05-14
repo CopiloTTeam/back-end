@@ -1,6 +1,6 @@
 package com.fatec.pro4tech.entities;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,6 +16,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +41,8 @@ public class Titulo {
 	private Cliente cliente;
 
 	@Column
-	private LocalDateTime data_geracao; 
+	@Temporal(TemporalType.DATE)
+	private Date data_geracao; 
 
 	@Column
 	private String valor;
