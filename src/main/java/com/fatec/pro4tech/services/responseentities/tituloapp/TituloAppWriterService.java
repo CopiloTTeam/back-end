@@ -44,13 +44,15 @@ public class TituloAppWriterService {
 			
 			Date date = new Date();
 			titu.setData_geracao(date);
-			titu.setValor(titulo.valor()); 
+			String S= Float.toString(titulo.valor());
+			Float valor1 = Float.parseFloat(S.replace(".","").replace(",", "."));
+			titu.setValor(valor1/10); 
 			titu.setNome_produto( titulo.nome_produto());
 			titu.setCliente( currentUser.get() );
 			titu.setFuncionario( currentFunc.get() ); 
 			repository.save(titu);
 			Titulo target = repository.getById(titu.getId());
-            float valor = Float.parseFloat(titu.getValor().replace(".", "").replace(",", "."));
+            float valor = titu.getValor();
 			List<Parcela> listaaa = new ArrayList<>();
             for (int parcelas = 1; parcelas <= 12; parcelas++) {
 				Date data_vencimento = new Date();
@@ -63,7 +65,7 @@ public class TituloAppWriterService {
                 parcela.setData_pagamento(null);
                 parcela.setData_credito(null); 
                 parcela.setStatus(false);
-                parcela.setValor(String.format("%.2f", (valor / 12)/100));
+                parcela.setValor(valor / 12);
                 parcela.setValor_pago(null);
 				parcela.setCodigo_barra(titulo.codigo_barra());
 				parcela.setNumero_boleto(titulo.numero_boleto());

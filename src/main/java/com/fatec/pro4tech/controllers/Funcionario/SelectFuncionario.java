@@ -22,8 +22,7 @@ public class SelectFuncionario {
 	private UserAppReaderService userReader;
 
 	@GetMapping("/listar/funcionario/{cpf}")
-	@PermitAll
-	// @PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro','Sem_Cargo')")
+	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro','Sem_Cargo')")
 	public ResponseEntity<Funcionario> getUser(@PathVariable String cpf) {
 		return userReader.getUser(cpf);
 	}

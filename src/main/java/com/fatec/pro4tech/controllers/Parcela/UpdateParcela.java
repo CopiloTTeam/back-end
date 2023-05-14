@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.pro4tech.entities.Parcela;
+import com.fatec.pro4tech.models.ParcelaModel;
 import com.fatec.pro4tech.models.TituloModel;
 import com.fatec.pro4tech.services.responseentities.parcelaapp.ParcelaAppUpdateService;
 
@@ -21,9 +22,10 @@ public class UpdateParcela {
 	@Autowired
 	private ParcelaAppUpdateService userWriter;
 
-	@PostMapping("/atualizar/parcela/{id}")
+	
 	@PreAuthorize("hasAnyAuthority('Administrador','Financeiro')")
-	public ResponseEntity<?> saveUser(@RequestBody Parcela parcela, @PathVariable Long id) {
+	@PutMapping("/atualizar/parcela/{id}")
+	public ResponseEntity<?> saveUser(@RequestBody ParcelaModel parcela, @PathVariable Long id) {
 		return userWriter.update(parcela, id);
 	}
 

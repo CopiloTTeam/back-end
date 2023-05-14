@@ -45,7 +45,7 @@ public class Titulo {
 	private Date data_geracao; 
 
 	@Column
-	private String valor;
+	private Float valor;
 
 	@Column 
 	private String nome_produto;

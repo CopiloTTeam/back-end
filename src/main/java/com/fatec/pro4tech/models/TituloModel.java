@@ -7,15 +7,15 @@ public record TituloModel(
     String cliente_cpf , 
     String funcionario_cpf,
     Date data_geracao,
-    String data_credito , 
+    Date data_credito , 
     String numero_boleto, 
     String qr_code , 
     String nome_produto,
-    String valor,
+    Float valor,
     String codigo_barra , 
-    String data_vencimento , 
-    String data_pagamento ,  
+    Date data_vencimento , 
+    Date data_pagamento ,  
     Boolean status , 
-    String valor_pago) { 
+    Float valor_pago) { 
 
 }

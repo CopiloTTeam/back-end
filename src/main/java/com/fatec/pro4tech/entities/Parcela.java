@@ -53,10 +53,10 @@ public class Parcela {
     private Boolean status;
 
     @Column
-    private String valor;
+    private Float valor;
 
     @Column
-    private String valor_pago;
+    private Float valor_pago;
 
     @Column
 	private String codigo_barra;

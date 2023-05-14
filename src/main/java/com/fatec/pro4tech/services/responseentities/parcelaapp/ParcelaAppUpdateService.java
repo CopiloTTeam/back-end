@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
+import com.fatec.pro4tech.models.ParcelaModel;
 import com.fatec.pro4tech.models.TituloModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -27,7 +28,7 @@ public class ParcelaAppUpdateService {
     @Autowired
     private RepositorioParcela repository;
 
-    public ResponseEntity<?> update(Parcela updateParcela, Long id_parcela) {
+    public ResponseEntity<Parcela> update(ParcelaModel updateParcela, Long id_parcela) {
         try {
             Optional<Parcela> currentUser = repository.findById(id_parcela);
             Parcela target = currentUser.orElse(null);
@@ -37,8 +38,8 @@ public class ParcelaAppUpdateService {
             }
 
             target.setStatus(true);
-            if (updateParcela.getValor_pago() != null) {
-                target.setValor_pago(updateParcela.getValor_pago());
+            if (updateParcela.valor_pago() != null) {
+                target.setValor_pago(updateParcela.valor_pago());
             }
             LocalDateTime dataPagamento = LocalDateTime.now();
             LocalDateTime dataCredito = dataPagamento.plusDays(2);

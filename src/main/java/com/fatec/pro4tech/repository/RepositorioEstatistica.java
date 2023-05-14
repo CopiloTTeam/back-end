@@ -8,10 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.fatec.pro4tech.entities.Parcela;
 
-public interface RepositorioParcela extends JpaRepository<Parcela, Long> {
+public interface RepositorioEstatistica extends JpaRepository<Parcela, Long> {
 
-   Optional<Parcela> findById(Long id_parcela);
-
-   @Query("SELECT p FROM Parcela p WHERE p.titulo.id = ?1")
+   @Query("SELECT * FROM Parcela p where p.data_vencimento< '2023-06-31'")
    Optional<List<Parcela>> findByTituloId(Long idTitulo);
 }
