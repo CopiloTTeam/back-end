@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +23,13 @@ public class SelectParcela {
 
 	@PostMapping("/listar/parcelas")
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
-	public ResponseEntity<List<Parcela>> getUser(@RequestBody Titulo titulo) {
-		return ParcelaReader.getParcelas(titulo);
+	public ResponseEntity<List<Parcela>> getParcelas(@RequestBody Titulo titulo) {
+		return ParcelaReader.getParcelas(titulo); 
 	}
-
+	
+	@PostMapping("/listar/parcela/:id")
+	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
+	public ResponseEntity<Parcela> getParcela(@PathVariable Long id) {
+		return ParcelaReader.getParcela(id);
+	}
 }
