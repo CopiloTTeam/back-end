@@ -17,12 +17,12 @@ import com.fatec.pro4tech.services.responseentities.parcelaapp.ParcelaAppUpdateS
 @RestController
 
 public class UpdateParcela {
-    @Autowired
-	private ParcelaAppUpdateService userWriter;
+    // @Autowired
+	// private ParcelaAppUpdateService userWriter;
 
-	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
-	@PutMapping("/atualizar/parcela/{id_parcela}")
-	public ResponseEntity<?> saveUser(@RequestBody TituloModel updateTitulo , @PathVariable Long id_parcela) {
-		return userWriter.update(updateTitulo, id_parcela);
-	}
+	// @PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
+	// @PutMapping("/atualizar/parcela/{id_parcela}")
+	// public ResponseEntity<?> saveUser(@RequestBody TituloModel updateTitulo , @PathVariable Long id_parcela) {
+	// 	return userWriter.update(updateTitulo, id_parcela);
+	// }
 }

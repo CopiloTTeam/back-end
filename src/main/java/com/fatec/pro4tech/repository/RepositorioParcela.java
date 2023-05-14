@@ -14,7 +14,7 @@ public interface RepositorioParcela extends JpaRepository<Parcela, Long> {
    @Query("SELECT p FROM Parcela p WHERE p.titulo.id = ?1")
    Optional<List<Parcela>> findByTituloId(Long idTitulo);
 
-   Optional<Parcela> findByid_parcela (Long id_parcela);
+   // Optional<Parcela> findByid_parcela (Long id_parcela);
 
 
 }
