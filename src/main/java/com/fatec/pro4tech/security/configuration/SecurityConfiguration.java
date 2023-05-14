@@ -81,7 +81,7 @@ public class SecurityConfiguration {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable();
 
-		http.authorizeHttpRequests().requestMatchers("/funcionarios/cadastrar", "/login").permitAll().anyRequest().authenticated();
+		http.authorizeHttpRequests().requestMatchers("/funcionarios/cadastrar", "/login", "/listar/parcela/{id}").permitAll().anyRequest().authenticated();
 
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
