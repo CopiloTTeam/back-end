@@ -24,21 +24,45 @@ public class UserAppUpdaterService {
 		try {
 			Optional<Funcionario> currentUser = repository.findByCpf(updateUser.getCpf());
 			Funcionario target = currentUser.orElse(null);
-			if(!(updateUser.getNome() == null)){
-				if(!updateUser.getNome().isEmpty()){
-					target.setNome(updateUser.getNome());
-				}
+			System.out.println("FOUND " + updateUser);
+			if (target == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			}
-			if(updateUser.getEmail() != null ){
-				if (!updateUser.getEmail().isEmpty()) {
-					target.setEmail(updateUser.getEmail());
-				}
+
+			if(updateUser.getNome() != null){
+				target.setNome(updateUser.getNome());
+			} else{
+				target.setNome(target.getNome());
 			}
-			if (!(updateUser.getCredential() == null)) {
+			if(updateUser.getEmail() != null){
+				target.setEmail(updateUser.getEmail());
+			} else{
+				target.setEmail(target.getEmail());
+			}
+			if(updateUser.getCpf() != null){
+				target.setCpf(updateUser.getCpf());
+			} else{
+				target.setCpf(target.getCpf());
+			}
+			if(updateUser.getCredential().getRole() != null){
+				target.getCredential().setRole(updateUser.getCredential().getRole());
+			} else{
+				target.getCredential().setRole(target.getCredential().getRole());
+			} 
+			if (updateUser.getCredential().getPassword() != null) {
 				String password = updateUser.getCredential().getPassword();
 				updateUser.getCredential().setPassword(encoder.encode(password));
-				target.setCredential(updateUser.getCredential());
+				target.getCredential().setPassword(updateUser.getCredential().getPassword());
+			} else{
+				target.getCredential().setPassword(target.getCredential().getPassword());
 			}
+			if(updateUser.getCredential().getUserName() != null){
+				target.getCredential().setUserName(updateUser.getCredential().getUserName());
+			} else{
+				target.getCredential().setUserName(target.getCredential().getUserName());
+			}
+
+			
 			
 			repository.save(target);
 			return new ResponseEntity<>(target, HttpStatus.ACCEPTED);

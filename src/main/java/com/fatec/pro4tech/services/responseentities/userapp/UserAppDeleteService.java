@@ -20,8 +20,13 @@ public class UserAppDeleteService {
 
 	public ResponseEntity<?> delete(Funcionario user) {
 		try {
-			Optional<Funcionario> currentUser = repository.findById(user.getCpf());
+			System.out.println(user);
+			Optional<Funcionario> currentUser = repository.findByCpf(user.getCpf());
 			Funcionario target = currentUser.orElse(null);
+			if(target == null) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			System.out.println(target);
 			repository.delete(target);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (InvalidDataAccessApiUsageException e) {
