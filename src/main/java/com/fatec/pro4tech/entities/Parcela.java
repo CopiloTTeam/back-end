@@ -1,5 +1,8 @@
 package com.fatec.pro4tech.entities;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,10 +40,10 @@ public class Parcela {
     private String data_vencimento;
 
     @Column
-    private String data_pagamento;
+    private Date data_pagamento;
 
     @Column
-    private String data_credito;
+    private Date data_credito;
 
     @Column
     private Boolean status;

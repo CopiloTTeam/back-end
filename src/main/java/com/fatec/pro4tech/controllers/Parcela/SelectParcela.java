@@ -8,8 +8,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.pro4tech.entities.Parcela;
@@ -31,7 +29,7 @@ public class SelectParcela {
 	}
 	
 	@GetMapping("/listar/parcela/{id}")
-	@PermitAll
+	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	public ResponseEntity<Parcela> getParcela(@PathVariable Long id) {
 		return ParcelaReader.getParcela(id);
 	}
