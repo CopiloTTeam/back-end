@@ -30,11 +30,18 @@ public class LogsAppCreateService {
 	
 	public ResponseEntity<?> save(LogModel log) {
 		try {
-			Optional<Cliente> currentUser = repositoryCliente.findByCpf(log.cliente_cpf());
+			Optional<Cliente> currentUser = Optional.empty();
+			if(log.cliente_cpf() != null){
+				currentUser = repositoryCliente.findByCpf(log.cliente_cpf());
+			}
 			Optional<Funcionario> currentFunc = repositoryFuncionario.findByCpf(log.funcionario_cpf());
 			
 			Logs target = new Logs();
-			target.setCliente(currentUser.get());
+			if (currentUser.isPresent()) {
+				target.setCliente(currentUser.get());
+			} else {
+				target.setCliente(null); // ou defina um valor padrão aqui
+			}
 			target.setFuncionario(currentFunc.get());
 			Date date = new Date(System.currentTimeMillis());
 			target.setDescricao(log.descricao());

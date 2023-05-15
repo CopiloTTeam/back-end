@@ -36,7 +36,7 @@ public class Logs {
     @JsonBackReference
     private Funcionario funcionario;
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
     @JoinColumn(name = "cliente_cpf")
     @JsonBackReference
     private Cliente cliente;
