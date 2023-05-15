@@ -17,8 +17,8 @@ public class ParcelaAppReaderService {
     @Autowired
 	private RepositorioParcela repository;
 
-	public ResponseEntity<List<Parcela>> getParcelas(Titulo titulo) {
-		Optional<List<Parcela>> parcelas = repository.findByTituloId(titulo.getId());
+	public ResponseEntity<List<Parcela>> getParcelas(Titulo id) {
+		Optional<List<Parcela>> parcelas = repository.findByTituloId(id.getId());
 		if (parcelas.isPresent()) {
 			return ResponseEntity.ok(parcelas.get());
 		} else {
@@ -34,4 +34,16 @@ public class ParcelaAppReaderService {
 			return ResponseEntity.notFound().build();
 		}
 	}
+
+	public ResponseEntity<List<Parcela>> getParcela() {
+		List<Parcela> parcelas = repository.findAll();
+		if (!parcelas.isEmpty()) {
+			return ResponseEntity.ok(parcelas);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+
+
 }
