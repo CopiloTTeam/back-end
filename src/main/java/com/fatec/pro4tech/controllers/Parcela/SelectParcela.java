@@ -19,18 +19,24 @@ import jakarta.annotation.security.PermitAll;
 @CrossOrigin
 @RestController
 public class SelectParcela {
-    @Autowired
+	@Autowired
 	private ParcelaAppReaderService ParcelaReader;
 
 	@GetMapping("/listar/parcelas")
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
-	public ResponseEntity<List<Parcela>> getParcelas(@PathVariable Titulo titulo) {
-		return ParcelaReader.getParcelas(titulo); 
+	public ResponseEntity<List<Parcela>> getParcelas(@PathVariable Titulo id) {
+		return ParcelaReader.getParcelas(id);
 	}
-	
+
 	@GetMapping("/listar/parcela/{id}")
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	public ResponseEntity<Parcela> getParcela(@PathVariable Long id) {
 		return ParcelaReader.getParcela(id);
+	}
+
+	@GetMapping("/parcela")
+	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
+	public ResponseEntity<List<Parcela>> getParcela() {
+		return ParcelaReader.getParcela();
 	}
 }

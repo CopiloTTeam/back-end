@@ -14,11 +14,11 @@ import com.fatec.pro4tech.repository.RepositorioParcela;
 
 @Service
 public class ParcelaAppReaderService {
-    @Autowired
+	@Autowired
 	private RepositorioParcela repository;
 
-	public ResponseEntity<List<Parcela>> getParcelas(Titulo titulo) {
-		Optional<List<Parcela>> parcelas = repository.findByTituloId(titulo.getId());
+	public ResponseEntity<List<Parcela>> getParcelas(Titulo id) {
+		Optional<List<Parcela>> parcelas = repository.findByTituloId(id.getId());
 		if (parcelas.isPresent()) {
 			return ResponseEntity.ok(parcelas.get());
 		} else {
@@ -30,6 +30,15 @@ public class ParcelaAppReaderService {
 		Optional<Parcela> parcela = repository.findById(id_parcela);
 		if (parcela.isPresent()) {
 			return ResponseEntity.ok(parcela.get());
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	public ResponseEntity<List<Parcela>> getParcela() {
+		List<Parcela> parcelas = repository.findAll();
+		if (!parcelas.isEmpty()) {
+			return ResponseEntity.ok(parcelas);
 		} else {
 			return ResponseEntity.notFound().build();
 		}
