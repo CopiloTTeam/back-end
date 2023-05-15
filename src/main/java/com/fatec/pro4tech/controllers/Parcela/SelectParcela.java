@@ -14,20 +14,18 @@ import com.fatec.pro4tech.entities.Parcela;
 import com.fatec.pro4tech.entities.Titulo;
 import com.fatec.pro4tech.services.responseentities.parcelaapp.ParcelaAppReaderService;
 
-import jakarta.annotation.security.PermitAll;
-
 @CrossOrigin
 @RestController
 public class SelectParcela {
-	@Autowired
+    @Autowired
 	private ParcelaAppReaderService ParcelaReader;
 
 	@GetMapping("/listar/parcelas")
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	public ResponseEntity<List<Parcela>> getParcelas(@PathVariable Titulo id) {
-		return ParcelaReader.getParcelas(id);
+		return ParcelaReader.getParcelas(id); 
 	}
-
+	
 	@GetMapping("/listar/parcela/{id}")
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	public ResponseEntity<Parcela> getParcela(@PathVariable Long id) {

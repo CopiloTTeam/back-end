@@ -14,7 +14,7 @@ import com.fatec.pro4tech.repository.RepositorioParcela;
 
 @Service
 public class ParcelaAppReaderService {
-	@Autowired
+    @Autowired
 	private RepositorioParcela repository;
 
 	public ResponseEntity<List<Parcela>> getParcelas(Titulo id) {
@@ -43,4 +43,7 @@ public class ParcelaAppReaderService {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+
+
 }
