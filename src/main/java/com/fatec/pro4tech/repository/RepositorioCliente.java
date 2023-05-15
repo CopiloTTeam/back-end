@@ -9,9 +9,5 @@ import com.fatec.pro4tech.entities.Cliente;
 
 
     
-public interface RepositorioCliente extends JpaRepository<Cliente, Long>{
-   Optional<Cliente> findByCpf(String cpf);
-   
-void deleteByCpf(String cpf);
-
+public interface RepositorioCliente extends JpaRepository<Cliente, String>{
 }

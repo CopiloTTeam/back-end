@@ -29,6 +29,7 @@ public class ClienteAppWriterService {
             
             cli.setCpf(cliente.cpf());
             cli.setNome(cliente.nome());
+			cli.setDataNascimento(cliente.dataNascimento());
             Contato contato = new Contato();
             contato.setTelefone(cliente.telefone());
             contato.setEmail(cliente.email());
@@ -42,6 +43,7 @@ public class ClienteAppWriterService {
 			endereco.setEstado(cliente.estado());
 			endereco.setLogradouro(cliente.logradouro());
 			endereco.setComplemento(cliente.complemento());
+			endereco.setRua(cliente.rua());
 			// endereco.setCliente(cli);
 			cli.setEndereco(endereco);
 

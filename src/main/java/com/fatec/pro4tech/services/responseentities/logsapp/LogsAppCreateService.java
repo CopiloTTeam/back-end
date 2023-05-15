@@ -32,7 +32,7 @@ public class LogsAppCreateService {
 		try {
 			Optional<Cliente> currentUser = Optional.empty();
 			if(log.cliente_cpf() != null){
-				currentUser = repositoryCliente.findByCpf(log.cliente_cpf());
+				currentUser = repositoryCliente.findById(log.cliente_cpf());
 			}
 			Optional<Funcionario> currentFunc = repositoryFuncionario.findByCpf(log.funcionario_cpf());
 			

@@ -41,7 +41,7 @@ public class Funcionario {
 	private CredentialApp credential;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "funcionario", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	// @JsonManagedReference
 	private List<Logs> logs;
 
 }

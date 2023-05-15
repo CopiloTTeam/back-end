@@ -16,16 +16,7 @@ import com.fatec.pro4tech.repository.RepositorioParcela;
 public class ParcelaAppReaderService {
     @Autowired
 	private RepositorioParcela repository;
-
-	public ResponseEntity<List<Parcela>> getParcelas(Titulo id) {
-		Optional<List<Parcela>> parcelas = repository.findByTituloId(id.getId());
-		if (parcelas.isPresent()) {
-			return ResponseEntity.ok(parcelas.get());
-		} else {
-			return ResponseEntity.notFound().build();
-		}
-	}
-
+ 
 	public ResponseEntity<Parcela> getParcela(Long id_parcela) {
 		Optional<Parcela> parcela = repository.findById(id_parcela);
 		if (parcela.isPresent()) {

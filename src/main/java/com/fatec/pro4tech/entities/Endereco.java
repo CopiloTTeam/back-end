@@ -25,5 +25,7 @@ public class Endereco {
 	private String estado;
 	@Column
 	private String complemento;
+	@Column
+	private String rua;
 	
 }

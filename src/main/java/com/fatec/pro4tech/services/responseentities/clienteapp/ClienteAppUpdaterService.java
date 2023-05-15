@@ -23,8 +23,7 @@ public class ClienteAppUpdaterService {
 
 	public ResponseEntity<Cliente> update(ClienteModel updateUser) {
 		try {
-    
-			Optional<Cliente> currentUser = repository.findByCpf(updateUser.cpf());
+			Optional<Cliente> currentUser = repository.findById(updateUser.cpf());
 			Cliente target = currentUser.orElse(null);
             Endereco endereco = new Endereco();
             Contato contato = new Contato();
@@ -42,6 +41,11 @@ public class ClienteAppUpdaterService {
                 target.setCpf(updateUser.cpf());
             } else {
                 target.setCpf(target.getCpf()); 
+            }
+            if(updateUser.dataNascimento() != null){
+                target.setDataNascimento(updateUser.dataNascimento());
+            } else {
+                target.setDataNascimento(target.getDataNascimento());
             }
             // -----------Cliente----------------
 
@@ -94,6 +98,11 @@ public class ClienteAppUpdaterService {
                 endereco.setComplemento(updateUser.complemento());
             } else {
                 endereco.setComplemento(target.getEndereco().getComplemento());
+            }
+            if(updateUser.rua() != null){
+                endereco.setRua(updateUser.rua());
+            } else {
+                endereco.setRua(target.getEndereco().getRua());
             }
             
             target.setEndereco(endereco);

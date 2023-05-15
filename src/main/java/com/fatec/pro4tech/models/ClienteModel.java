@@ -1,5 +1,7 @@
 package com.fatec.pro4tech.models;
 
+import java.sql.Date;
+
 public record ClienteModel(
     String cpf, 
     String nome, 
@@ -11,6 +13,7 @@ public record ClienteModel(
     String cidade, 
     String estado, 
     String logradouro, 
-    String complemento) {
+    String complemento,
+    Date dataNascimento) {
     
 }

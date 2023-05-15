@@ -24,12 +24,13 @@ public class UserAppWriterService {
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	public ResponseEntity<?> save(Funcionario user) {
+		System.err.println("Criar Cliente");
 		try {
 			if (service.isCredentialValid(user.getCredential())) {
 				String password = user.getCredential().getPassword();
 				user.getCredential().setPassword(encoder.encode(password));
 			}
-			Date registration = new Date(System.currentTimeMillis());
+			Date registration = new Date();
 			user.setRegistration(registration);
 			repository.save(user);
 			return new ResponseEntity<>(HttpStatus.CREATED);

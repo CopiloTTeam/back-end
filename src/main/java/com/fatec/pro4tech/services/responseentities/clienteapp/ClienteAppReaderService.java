@@ -18,8 +18,7 @@ public class ClienteAppReaderService {
 	private RepositorioCliente repository;
 
 	public ResponseEntity<Cliente> getUser(String cpf) {
-		Optional<Cliente> currentUser = repository.findByCpf(cpf);
-		System.out.println(currentUser);
+		Optional<Cliente> currentUser = repository.findById(cpf);
 		Cliente user = currentUser.orElse(null);
 		if (user == null) {
 			return new ResponseEntity<Cliente>(user, HttpStatus.NOT_FOUND);
@@ -27,30 +26,6 @@ public class ClienteAppReaderService {
 			return new ResponseEntity<Cliente>(user, HttpStatus.FOUND);
 		}
 	}
-
-	public ResponseEntity<List<Cliente>> getUsers() {
-		List<Cliente> users = repository.findAll();
-		List<Cliente> rootUsers = new ArrayList<>();
-		// for (Cliente user : users) {
-		// 	if (user.getCredential() != null) {
-		// 		rootUsers.add(user);
-		// 	}
-		// }
-		users.removeAll(rootUsers);
-		return new ResponseEntity<List<Cliente>>(users, HttpStatus.FOUND);
-	}
-
-	public ResponseEntity<List<Cliente>> getRootUsers() {
-		// List<Cliente> users = repository.findAll();
-		List<Cliente> rootUsers = new ArrayList<>();
-		// for (Cliente user : users) {
-		// 	if (user.getCredential() != null) {
-		// 		rootUsers.add(user);
-		// 	}
-		// }
-		return new ResponseEntity<List<Cliente>>(rootUsers, HttpStatus.FOUND);
-	}
-
 
 	public ResponseEntity<List<Cliente>> getAllUsers(){
 		List<Cliente> users = repository.findAll();

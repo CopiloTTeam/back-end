@@ -1,5 +1,6 @@
 package com.fatec.pro4tech.entities;
 
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-@JsonIgnoreProperties
+// @JsonIgnoreProperties
 public class Cliente {
 
     @Id
@@ -37,6 +38,9 @@ public class Cliente {
 
     @OneToOne(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Contato contato;
+
+    @Column
+    private Date dataNascimento;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "cliente", cascade = CascadeType.ALL)
 	@JsonManagedReference

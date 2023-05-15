@@ -21,7 +21,6 @@ public class UpdateCliente {
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	@PutMapping("/atualizar/cliente")
 	public ResponseEntity<Cliente> update(@RequestBody ClienteModel user) {
-    
 		return updater.update(user);
 	}
 }

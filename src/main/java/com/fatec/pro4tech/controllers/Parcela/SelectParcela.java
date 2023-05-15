@@ -19,12 +19,6 @@ import com.fatec.pro4tech.services.responseentities.parcelaapp.ParcelaAppReaderS
 public class SelectParcela {
     @Autowired
 	private ParcelaAppReaderService ParcelaReader;
-
-	@GetMapping("/listar/parcelas")
-	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
-	public ResponseEntity<List<Parcela>> getParcelas(@PathVariable Titulo id) {
-		return ParcelaReader.getParcelas(id); 
-	}
 	
 	@GetMapping("/listar/parcela/{id}")
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
