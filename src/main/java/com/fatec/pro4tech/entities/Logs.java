@@ -25,7 +25,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-// @JsonIgnoreProperties
+@JsonIgnoreProperties
 public class Logs {
     @Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class Logs {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "funcionario_cpf")
-    // @JsonBackReference
+    @JsonBackReference
     private Funcionario funcionario;
     
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
