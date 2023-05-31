@@ -25,7 +25,7 @@ public class App implements CommandLineRunner {
 		configuracao.put("server.port", "8080");
 		configuracao.put("spring.datasource.url", "jdbc:mysql://localhost:3306/pro4tech"); // rodar local
 		configuracao.put("spring.datasource.username", "root"); // usuario
-		configuracao.put("spring.datasource.password", "fatec"); // senha
+		configuracao.put("spring.datasource.password", "admin"); // senha
 		configuracao.put("spring.jpa.hibernate.ddl-auto", "create"); // criar editar
 		configuracao.put("spring.jpa.show-sql", "true"); // mostrar comandos
 
