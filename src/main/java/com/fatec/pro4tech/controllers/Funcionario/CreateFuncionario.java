@@ -25,7 +25,7 @@ public class CreateFuncionario {
 
 	@PostMapping("/funcionarios/cadastrar")
 	@PermitAll
-	public ResponseEntity<?> saveUser(@RequestBody Funcionario user) {
+	public ResponseEntity<?> saveUser( @RequestBody Funcionario user) {
 		user.getCredential().setRole(roles.Sem_Cargo);
 		return userWriter.save(user);
 	}
