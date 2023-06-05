@@ -70,6 +70,7 @@ public class TituloAppWriterService {
 				parcela.setCodigo_barra(titulo.codigo_barra());
 				parcela.setNumero_boleto(titulo.numero_boleto());
 				parcela.setQr_code(titulo.qr_code());
+				parcela.setNumeroParcelaTitulo(Integer.toString(parcelas));
 				repositoryParcela.save(parcela);
 
 				listaaa.add(parcela);

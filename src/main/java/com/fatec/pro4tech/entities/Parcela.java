@@ -67,6 +67,9 @@ public class Parcela {
 	@Column
 	private String numero_boleto;
 
+    @Column
+    private String numeroParcelaTitulo;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "tituloId")
     @JsonBackReference
