@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.pro4tech.entities.Funcionario;
+import com.fatec.pro4tech.models.EnvioEmail;
 import com.fatec.pro4tech.security.roles.roles;
 import com.fatec.pro4tech.services.responseentities.Email.EmailSenderService;
 // import com.fatec.pro4tech.entities.titulos;
@@ -32,17 +33,22 @@ public class CreateFuncionario {
 
 	@PostMapping("/email")
     @PermitAll
-    public ResponseEntity<?> sendEmail() {
+    public ResponseEntity<?> sendEmail(@RequestBody EnvioEmail email) {
         try {
-            String toEmail = "lucasviniciuswinner2012@gmail.com";
-            String subject = "Teste de Email";
-            String body = "Este é um teste de envio de email.";
-
-            // Caminho completo do arquivo a ser anexado
-            String filePath = "C:/Users/lucas/OneDrive/Área de Trabalho/aaa/teste.pdf";
-
-            emailSenderService.sendEmailWithAttachment(toEmail, subject, body, filePath);
-
+            String toEmail = email.email();
+            String subject = "Cobrança de Titulo";
+            String body = 
+            "<html> " +
+              "<head>" +
+              "</head>" +
+              "<body>" +
+              "<h1> Aviso de Cobrança </h1>" +
+              "<p> A cobrança no valor de <b> R$" + email.valor() + "</b> referente ao produto <b>" + email.nome_produto() + "</b> já esta disponivel para pagamento.</p>" +
+              "<p> a sua fatura tem data de vencimento para o dia:<b>" + email.data_vencimento() + "</b></p>" +
+              "<h3> Atenciosamente, CopiloTTeam </h3>" +
+              "</body>" +
+            "</html>";
+            emailSenderService.sendEmailWithAttachment(toEmail, subject, body);
             return ResponseEntity.ok("Email sent successfully.");
         } catch (MessagingException e) {
             return ResponseEntity.status(500).body("Failed to send email: " + e.getMessage());
