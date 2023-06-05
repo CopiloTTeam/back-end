@@ -24,8 +24,8 @@ public class EmailSenderService {
 
     public void sendEmailWithAttachment(String toEmail,
                                         String subject,
-                                        String body,
-                                        String filePath) throws MessagingException {
+                                        String body
+                                        ) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -34,11 +34,7 @@ public class EmailSenderService {
         helper.setSubject(subject);
         helper.setText(body);
 
-        // Anexando o arquivo
-        File file = new File(filePath);
-        FileSystemResource fileResource = new FileSystemResource(file);
-        helper.addAttachment(file.getName(), fileResource);
-
+        message.setContent(body, "text/html");
         mailSender.send(message);
         System.out.println("Email with attachment sent successfully.");
     }
