@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fatec.pro4tech.entities.Funcionario;
 import com.fatec.pro4tech.services.responseentities.userapp.UserAppReaderService;
 
-import jakarta.annotation.security.PermitAll;
 
 @CrossOrigin
 @RestController

@@ -12,7 +12,7 @@ public class ValidarCPF {
             soma += (cpf.charAt(i) - '0') * (10 - i);
         }
         int digitoVerificador1 = 11 - (soma % 11);
-        if (digitoVerificador1 > 9) {
+        if (digitoVerificador1 > 9) { 
             digitoVerificador1 = 0;
         }
 

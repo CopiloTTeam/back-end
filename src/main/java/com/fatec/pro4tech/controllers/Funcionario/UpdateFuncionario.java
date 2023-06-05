@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fatec.pro4tech.entities.Funcionario;
 import com.fatec.pro4tech.services.responseentities.userapp.UserAppUpdaterService;
 
-// import jakarta.annotation.security.PermitAll;
 
 @CrossOrigin
 @RestController
@@ -19,7 +18,6 @@ public class UpdateFuncionario {
     @Autowired
 	private UserAppUpdaterService updater;
 
-	// @PermitAll
 	@PreAuthorize("hasAnyAuthority('Administrador','Comercial', 'Financeiro')")
 	@PutMapping("/atualizar/funcionario")
 	public ResponseEntity<Funcionario> update(@RequestBody Funcionario user) {

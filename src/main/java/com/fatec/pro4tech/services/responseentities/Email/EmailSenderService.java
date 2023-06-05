@@ -1,22 +1,12 @@
 package com.fatec.pro4tech.services.responseentities.Email;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
-
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-
-import java.io.File;
-
 @Service
 public class EmailSenderService {
     @Autowired

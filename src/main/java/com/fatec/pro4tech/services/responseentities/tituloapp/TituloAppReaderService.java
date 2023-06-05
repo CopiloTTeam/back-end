@@ -1,6 +1,5 @@
 package com.fatec.pro4tech.services.responseentities.tituloapp;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

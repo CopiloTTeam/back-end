@@ -27,30 +27,6 @@ public class UserAppReaderService {
 		}
 	}
 
-	public ResponseEntity<List<Funcionario>> getUsers() {
-		List<Funcionario> users = repository.findAll();
-		List<Funcionario> rootUsers = new ArrayList<>();
-		// for (Funcionario user : users) {
-		// 	if (user.getCredential() != null) {
-		// 		rootUsers.add(user);
-		// 	}
-		// }
-		users.removeAll(rootUsers);
-		return new ResponseEntity<List<Funcionario>>(users, HttpStatus.FOUND);
-	}
-
-	public ResponseEntity<List<Funcionario>> getRootUsers() {
-		List<Funcionario> users = repository.findAll();
-		List<Funcionario> rootUsers = new ArrayList<>();
-		// for (Funcionario user : users) {
-		// 	if (user.getCredential() != null) {
-		// 		rootUsers.add(user);
-		// 	}
-		// }
-		return new ResponseEntity<List<Funcionario>>(rootUsers, HttpStatus.FOUND);
-	}
-
-
 	public ResponseEntity<List<Funcionario>> getAllUsers(){
 		List<Funcionario> users = repository.findAll();
 		return new ResponseEntity<List<Funcionario>> (users, HttpStatus.FOUND);

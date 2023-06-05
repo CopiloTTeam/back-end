@@ -11,7 +11,6 @@ import com.fatec.pro4tech.entities.Funcionario;
 import com.fatec.pro4tech.models.EnvioEmail;
 import com.fatec.pro4tech.security.roles.roles;
 import com.fatec.pro4tech.services.responseentities.Email.EmailSenderService;
-// import com.fatec.pro4tech.entities.titulos;
 import com.fatec.pro4tech.services.responseentities.userapp.UserAppWriterService;
 import jakarta.mail.MessagingException;
 import jakarta.annotation.security.PermitAll;

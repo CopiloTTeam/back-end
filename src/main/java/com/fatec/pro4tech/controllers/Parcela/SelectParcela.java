@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fatec.pro4tech.entities.Parcela;
-import com.fatec.pro4tech.entities.Titulo;
 import com.fatec.pro4tech.services.responseentities.parcelaapp.ParcelaAppReaderService;
 
 @CrossOrigin

@@ -3,8 +3,6 @@ package com.fatec.pro4tech.entities;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,7 +39,6 @@ public class Funcionario {
 	private CredentialApp credential;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "funcionario", cascade = CascadeType.ALL)
-	// @JsonManagedReference
 	private List<Logs> logs;
 
 }

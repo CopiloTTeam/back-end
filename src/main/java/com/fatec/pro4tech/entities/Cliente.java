@@ -21,7 +21,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-// @JsonIgnoreProperties
+
 public class Cliente {
 
     @Id

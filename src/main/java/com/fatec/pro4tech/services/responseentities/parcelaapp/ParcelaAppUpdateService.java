@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.Optional;
 
 import com.fatec.pro4tech.models.ParcelaModel;
-import com.fatec.pro4tech.models.TituloModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;

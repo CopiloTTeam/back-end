@@ -43,8 +43,6 @@ public class AuthenticatorService {
 				response = new ResponseEntity<>(model, HttpStatus.ACCEPTED);
 			}
 		}
-		// System.out.println("::::");
-		// System.out.println(credential);
 		return response;
 	}
 }
