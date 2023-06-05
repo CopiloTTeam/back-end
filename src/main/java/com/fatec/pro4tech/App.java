@@ -18,6 +18,7 @@ import com.fatec.pro4tech.services.DatabaseInitializer;
 public class App implements CommandLineRunner {
 	@Autowired
 	private DatabaseInitializer databaseInitializer;
+		
 
 	public static void main(String[] args) {
 		
